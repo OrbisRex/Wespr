@@ -1,0 +1,17 @@
+<div id="submenuline-article">
+    <ul>
+        <li n:if="$presenter->user->isAllowed('Wespr:Text:Article', 'default')"><a href="{plink Article:new}" {ifCurrent Article:new} class="current"{/ifCurrent}>{!_('New')}</a></li>
+        <li n:if="$presenter->user->isAllowed('Wespr:Text:Event', 'default')"><a href="{plink Event:}" {ifCurrent Event:*} class="current"{/ifCurrent}>{_'Events'}</a></li>                    
+    </ul>
+    <ul class="extends">
+        {if $countPages > 0}
+            <li>{_'Pages:'}</li>
+            {foreach $menu as $menuItem}
+                <li {ifset $menuItem->anchor}title="{_'Link to anchor'} {$menuItem->anchor} {_'within the page.'}"{/ifset}><a href="{plink Article: $menuItem->id}" {ifCurrent Article: $menuItem->id} class="current"{/ifCurrent}>{$menuItem->alias}</a></li>
+            {/foreach}
+        {else}
+            <li style="color: rgb(200,0,0);">{_'Web is not activated. Please upload template and create new page.'}</li>
+        {/if}
+        <li><a href="{plink Article:}" {ifCurrent Article: null} class="current"{/ifCurrent}>{!_('All Items')}</a></li>
+    </ul>
+</div>

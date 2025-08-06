@@ -1,0 +1,57 @@
+<a name="content"></a>
+{block content}
+
+    {*News panel*}
+    <section n:snippet="slider" class="news">
+        {if count($backgroundFiles)}
+            <div id="slideshow">
+                <div n:foreach="$backgroundFiles as $file" style="background-image: url('{$basePath}/{$file->path}');" id="{$file->id}" {if $file->order == 1} class="active"{/if}></div>
+            </div>
+        {/if}
+        {*Logo*}
+        <div class="logo">
+            <a href="{link Homepage:}"><span class='logo-y'>Y.:</span>Studio</a>
+        </div>
+        <div n:foreach='$mainArticles as $article' class="slideArticle">
+            <div class="article">
+                {!$article->perex|texy}
+                {!$article->text|texy}
+            </div>
+        </div>
+        <div class="slide-control">
+            {for $i=0; $i < $mainArticlesCount; $i++}
+                <a href='{link nextArticle! $i}' class="ajax">+</a>
+            {/for}
+        </div>
+    </section>
+    <section class="articles">
+        <div id="content_container">
+        {ifset $title}
+            <p>{_'I am really sorry but this page is under construction. See you soon.'}</p>
+        {else}
+            <section n:foreach='$articles as $article' class="article" id="{$article->uri}">
+
+                {*Article text*}
+                <div class="article-text">
+                    {!$article->perex|texy}
+                    {!$article->text|texy}
+                </div>
+
+                {*Main files of article*}
+                <div n:if="$mainFilesCount[$article->id] > 0" class="main-images left">
+                    {foreach $mainFiles[$article->id] as $file}
+                        <a n:if="$file->type == 'image/jpeg'" href="{$basePath}/{$file->path}" title="{_$file->describe}" class="group" rel="{$article->id}">
+                            <img src="{$basePath}/{$file->path_img}" alt="{$file->name}" title="{_$file->describe}">
+                        </a>
+                    {/foreach}
+                </div>
+            </section>
+        {/ifset}
+        </div>
+        <p class="add"><a href="#top">^</a></p>
+    </section>
+{/block}
+
+{block head}
+    <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/FrontModule/homepage/default.css" type="text/css">
+{/block}

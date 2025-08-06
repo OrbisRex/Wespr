@@ -1,0 +1,171 @@
+{* General template for email messages. *}
+{var $robots = noindex}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>{ifset $title}{$title} &ndash; {/ifset}WESPR</title>
+    
+    <style>
+    /* 
+        Inner style : WESPR - Email
+        Created on  : 5.11.2014
+        Author      : David Ehrlich
+        Licence     : MIT
+    */
+
+    /*General ////////////////////////////////////////////////////////////////////////*/
+    html {
+        position: static;
+        top: 0px;
+        left: auto;
+        width: 979px;
+        height: auto;
+        font: 16px/1.5 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
+        font-size: 1em;
+        color: rgb(0,0,0);
+        margin: auto;
+        background: rgb(255,255,255);
+    }
+
+    h1,h2,h3 {
+        color: rgb(0,0,0);
+        margin: 0px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+
+    p {
+        font-size: 1em;
+        margin-bottom: 0.5em;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    a {
+        color: rgb(100,100,100);
+        text-decoration: underline;
+    }
+
+    a:hover {
+        color: rgb(0,0,0);
+        text-decoration: none;
+    }
+
+    a[href^="error:"] {
+            background: red;
+            color: white;
+    }
+
+    * > :last-child { 
+        margin-right: 0;
+    }
+
+    /*Header area ////////////////////////////////////////////////////////////////*/
+    #header {
+        position: relative;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        height: 100px;
+        bottom: 0px;
+        padding: 5px;
+    }
+
+    img.logo {
+        margin-top: 1em;
+        margin-right: 1em;
+        float: right;
+        border: 0;
+    }
+
+    /*Content ////////////////////////////////////////////////////////////////////*/
+    #content {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: auto;
+        height: auto;
+    }
+    
+    p.link {
+        font-size: 0.8em;
+    }
+
+    /*Footer /////////////////////////////////////////////////////////////////////*/
+    footer {
+        display: block;
+        width: 99%;
+        height: auto;
+        padding: 1%;
+        margin: auto;
+        background-color: rgb(230,230,230);
+        border-top: 3px solid rgb(0,0,0);
+    }
+
+    footer .info {
+        display: inline-block;
+        width: 100%;
+    }
+
+    footer .info p {
+        text-align: center;
+        font-size: 0.8em;
+        color: rgb(100,100,100);
+        margin: 0px;
+        padding: 0px;
+    }
+
+    footer .info p.note {
+        text-align: center;
+        font-size: 0.6em;
+        color: rgb(100,100,100);
+        margin: 0px;
+        padding: 0px;
+        clear: both;
+    }
+
+    footer .info img {
+        padding: 10px 0px 10px 0px;
+        float: right;
+    }        
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="header-inner">
+            <a n:href=':Front:Homepage:default' target="_blank" title="{_'Otevřu spravované stránky v novém okně.'}"><img src="{$baseUri}/css//images/logo.png" alt="Logo." class="logo" /></a>
+        </div>
+    </div>
+        
+    <div id="content">
+        {include #content}
+    </div>
+    
+    <footer>
+        <div class="info">
+            <p>
+            Tento email jsem vygeneroval automaticky, z toho důvodu na něj nemusíte odpovídat.
+            Máte-li dotaz obraťe se na <a href="mailto:podpora@some-email.cz">podpora@some-email.cz</a>.
+            </p>
+            <p class="note">
+            WESPR je univerzální správce webových stránek. / Y.:studio, 2011 - {date('Y')}
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

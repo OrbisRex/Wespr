@@ -1,0 +1,41 @@
+{var $robots = noindex}
+
+{var $title = 'import akcí'}
+
+{block #content}
+    {control articleMenu}
+    
+    {if $step == 0}
+    {form importEventForm}
+        {control $form errors}
+        <h2>{_'Import'}</h2>
+        <p>{_'Upload CSV file or continue to insert list of event by press Next.'}</p>
+        <div id="form-main">
+            {label file /}<br />{input file autofocus => true}<br />
+        </div>
+        <div id="form-button">
+            {label cancel /}{input cancel}
+            {label read /}{input read}
+        </div>
+    {/form}
+    {elseif $step == 1}
+    {form checkEventForm}
+        {control $form errors}
+        <h2>{_'Import'}</h2>
+        <p>{_'Each line for event has to be in format: "Date(DD/MM/YYYY)+Name+Description+Time(HH:MM)+Venue+Price". The price is not compulsory.'}</p>
+        <div id="form-full">
+            {label text /}<br />{input text autofocus => true}<br />
+            {input state} {label state /}
+        </div>
+        <div id="form-button">
+            {label cancel /}{input cancel}
+            {label back /}{input back}
+            {label import /}{input import}
+        </div>
+    {/form}
+    {/if}
+
+{/block}
+
+{block head}
+{/block}

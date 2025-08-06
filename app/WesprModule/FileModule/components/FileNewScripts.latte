@@ -1,0 +1,201 @@
+{block scripts}
+    <!--Upload Files v1.1, David Ehrlich 2016-->
+    <script>
+        window.onload = function () {
+            var upload = document.getElementById("upload");
+            var cancelButton = document.getElementsByClassName("add-butto");
+            
+            //Dropbox area
+            var dropbox = document.getElementById("dropbox");
+            dropbox.addEventListener("dragenter", dragenter, false);
+            dropbox.addEventListener("dragover", dragover, false);
+            dropbox.addEventListener("drop", drop, false);
+            
+            //Save Button
+            dropbox.addEventListener("click", click, false);
+            upload.addEventListener("change", getFiles, false);
+
+            //Cancel Button
+            cancelButton[0].addEventListener("click", cancel, false);
+            cancelButton[1].addEventListener("click", cancel, false);
+            
+            function cancel(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                cancelSend();
+            }
+            
+            function dragenter(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+            function dragover(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+            
+            function drop(e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                var dt = e.dataTransfer;
+                var files = dt.files;
+                
+                handleFiles(files);
+            }
+            
+            function click(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                if (upload) {
+                    upload.click();
+                    getFiles();
+                }
+            }
+            
+            function getFiles() {
+                handleFiles(upload.files);
+            }
+        };
+        
+        function handleFiles(files) {
+            
+            var preview = document.getElementById("preview");
+            var maxPostSize = 8192*1024; //byte
+            var maxFileSize = 4096*1024; //byte
+            var countAcceptedFiles = 0;
+            var sumFileSize = 0;
+            
+            if (!files.length) {
+                preview.innerHTML = "<p>No files selected!</p>";
+              } else {
+                preview.innerHTML = "";
+                
+                var list = document.createElement("ul");
+                list.classList.add("thumb");                
+                preview.appendChild(list);
+                
+                for (var i = 0; i < files.length; i++) {
+                    var li = document.createElement("li");
+                    list.appendChild(li);
+                    
+                    var divImage = document.createElement("div");
+                    divImage.classList.add("image");                
+                    li.appendChild(divImage);
+                    
+                    var img = document.createElement("img");
+                    if(files[i].type === 'image/jpeg' || files[i].type === 'image/png') {
+                        img.src = window.URL.createObjectURL(files[i]);
+                    } else {
+                        img.src = innerHTML = '/wespr/www/images/download-file.png';
+                    }
+                    //Preview dimensions
+                    if(img.width > img.height) {
+                        img.width = 220;
+                    } else {
+                        img.height = 220;
+                    }
+                    
+                    //Check file size
+                    if(files[i].size >= maxFileSize) { //File size max 4MB.
+                        img.classList.add("rejected-size");
+                        img.setAttribute("title", "The image exceeded file size limit 4MB per file. It won't be uploaded on the server.");
+                    } else {
+                        img.classList.add("accepted");
+                        sumFileSize += files[i].size;
+                        countAcceptedFiles++;
+                    }
+                    
+                    //Check total size for POST.
+                    if(sumFileSize > maxPostSize) { //Total file size for POST 8MB.
+                        img.classList.remove("accepted");
+                        img.classList.add("rejected-postsize");
+                        img.setAttribute("title", "Images exceeded total files limit for upload. They won't be uploaded on the server.");
+                    }
+                    
+                    img.file = files[i];
+                    
+                    img.onload = function() {
+                      window.URL.revokeObjectURL(this.src);
+                    };
+                    
+                    //Draw images preview
+                    divImage.appendChild(img);
+                    
+                    var info = document.createElement("div");
+                    info.classList.add("info");
+                    divImage.appendChild(info);
+                    
+                    var fileTitle = document.createElement("div");
+                    fileTitle.classList.add("title");
+                    info.appendChild(fileTitle);
+                    fileTitle.innerHTML = "<strong>" + files[i].name + "</strong>";
+
+                    var fileType = document.createElement("div");
+                    fileType.classList.add("data");
+                    info.appendChild(fileType);
+                    fileType.innerHTML = files[i].type;
+
+                    var fileSizeContainer = document.createElement("div");
+                    fileSizeContainer.classList.add("data");
+                    info.appendChild(fileSizeContainer);
+                    var fileSize = files[i].size / (1024*1024); //MB
+                    fileSizeContainer.innerHTML = fileSize.toPrecision(3) + " MB";
+                    
+                    //divImage.appendChild(fileTitle);
+                }
+                
+                //Send only accepted files.
+                if(countAcceptedFiles > 0) {
+                    uploadFiles();
+                }
+            }        
+        }
+        
+        function uploadFiles() {
+            var imgs = document.querySelectorAll(".accepted");
+            var fd = new FormData();
+
+            for (var i = 0; i < imgs.length; i++) {
+                fd.append('newFiles[]', imgs[i].file);
+            }
+            
+            new fileSend(fd);
+        }
+        
+        function fileSend(data) {
+            var uri = "/wespr/www/admin/file.file/new/?do=fileNew-save";
+            var xhr = new XMLHttpRequest();
+            
+            xhr.open("POST", uri, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = xhr.responseText;
+                    json = JSON.parse(response);
+                    alert(json.msg); // handle response.
+                }
+            };
+            
+            // Initiate a multipart/form-data upload
+            xhr.send(data);
+        }
+        
+        function cancelSend() {
+            var uri = "/wespr/www/admin/file.file/new/?do=fileNew-cancel";
+            var xhr = new XMLHttpRequest();
+            
+            xhr.open("GET", uri, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == xhr.DONE && xhr.status == 200) {
+                    var response = xhr.responseText;
+                    alert(response);
+                }
+            };
+            
+            xhr.send();
+        }
+    </script>
+{/block}

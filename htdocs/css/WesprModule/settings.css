@@ -1,0 +1,104 @@
+/* 
+    Stylesheet  : WESPR - SettingsPresenter
+    Created on  : 12.10.2014
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*Homepage //////////////////////////////////////////////////////////////////*/
+#homepage-button-settings a:hover {
+    color: rgb(255,255,255);
+    background-color: rgb(0,120,220);
+}
+
+/*Menu area///////////////////////////////////////////////////////////////////*/
+#menuline li.setting a:hover, #menuline li.setting-current a {
+    color: rgb(255,255,255);
+    background-color: rgb(0,120,220);
+}
+
+/*Submenu area ///////////////////////////////////////////////////////////////*/
+#submenuline-setting {
+    border-top: 5px solid rgb(0,120,220);
+}
+
+#submenuline-setting ul li.tools {
+    border-right: 1px solid rgb(0,120,220); 
+    background: black;
+}
+
+#submenuline-setting li a:hover, #submenuline-setting li a.current {
+    color: rgb(0,120,220);
+}
+
+/*Forms //////////////////////////////////////////////////////////////////////*/
+#frm-pageForm .main-button:hover, .add-button:hover {
+    color: rgb(255,255,255);
+    background: rgb(0,120,220);
+    border: 1px solid rgb(50,50,50);
+}
+
+/*Texts //////////////////////////////////////////////////////////////////////*/
+h1, h2, h3 {
+    margin-top: 0.5em;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.notes-area {
+    font-size: 0.8em;
+    color: rgb(100,100,100);
+    margin: 0.5em 0;
+}
+
+/*Tables /////////////////////////////////////////////////////////////////////*/
+.table-settings .icon input:hover {
+    cursor:pointer; 
+    color: rgb(255,255,255);
+    background-color: rgb(0,120,220);
+}
+
+.table-settings td {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.table-settings td.public {
+    border: 1px solid rgb(0,120,220);
+}
+
+.table-settings td.locked {
+    border: 1px solid rgb(0,100,200);
+}
+
+.table-settings td:hover {
+    background-color: rgba(0,120,220,0.6);
+}
+
+.table-settings td.nohover:hover {
+    background: inherit;
+}
+
+/*Table list view */
+.table-settings td p a {
+    text-decoration: underline;
+    color: rgb(100,100,100);
+}
+
+.table-settings td p a:hover {
+    text-decoration: none;
+    color: rgb(0,0,0);
+}
+
+.table-settings .info {
+    position: static;
+    top: 0px;
+    width: auto;
+    height: 32px;
+    vertical-align: middle;
+    background: inherit;
+}

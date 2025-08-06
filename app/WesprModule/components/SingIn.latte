@@ -1,0 +1,29 @@
+{var $robots = noindex}
+
+{var $title = 'Přihlášení'}
+
+{block #content}
+
+<h1>Přihlášení</h1>
+
+{form signInForm}
+<div class="sign-in-form">
+    {control $form errors}
+
+    <div class="pair">
+        {label email /}
+        <div class="input">{input email}</div>
+    </div>
+    <div class="pair">
+        {label password /}
+        <div class="input">{input password}</div>
+    </div>
+    <div class="pair">
+        <div class="input">{input remember} {label remember /}</div>
+    </div>
+
+    <div class="pair">
+        <div class="input">{input send}</div>
+    </div>
+</div>
+{/form}

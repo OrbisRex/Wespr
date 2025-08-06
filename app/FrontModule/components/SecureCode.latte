@@ -1,0 +1,15 @@
+<div id="secure-code">
+{form secureCodeForm}
+    {control $form errors}
+    
+    <div id="form-main">
+        <h2>{_'Zabezpečený obsah'}</h2>
+        <p>{_'Pokud znáte bezpečnostní kód zadejte jej pro odemčení.'}</p>
+        {label code /}<br>{input code}
+    </div>
+    <div id='form-add'>
+    </div>
+    <div id="form-button">
+        {input send}
+    </div>
+{/form}

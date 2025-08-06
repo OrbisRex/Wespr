@@ -1,0 +1,44 @@
+{var $robots = noindex}
+
+{var $title = 'Úprava akce'}
+
+{block #content}
+    {control articleMenu}
+
+    {form eventForm}
+        {control $form errors}
+        <div id="form-main">
+            <h2>upravit akci</h2>
+            {label name /}<br />{input name autofocus => true}<br />
+            {label date /}
+            <p class ="note">Nejlépe zadávejte datum ve formátu <strong>DD.MM.RR</strong> a čas v <strong>HH:MM</strong>.</p>
+            {input date} {input time}
+            {label place /}<br />
+            {input place} 
+        </div>
+
+        <div id="form-add">
+            <div class="form-add-h3">
+                {ifset $id}
+                    {label cancel /}{input cancel}
+                    {label edit /}{input edit}
+                {/ifset}
+            </div>
+            {label price /}
+            {input price} {input state}
+            <p class ="lower-note">Není třeba zadávat značku měny. Stačí číslo.</p>
+            {label text /}<br />{input text}<br />
+        </div>
+        <div id="form-button">
+            {ifset $id}
+                {label cancel /}{input cancel}
+                {label edit /}{input edit}
+            {/ifset}
+            {label save /}{input save}
+        </div>
+    {/form}
+    
+{/block}
+
+{block head}
+{/block}

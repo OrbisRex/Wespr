@@ -1,0 +1,118 @@
+{var $robots = noindex}
+
+{var $title = 'File Management'}
+
+{block #content}
+{control fileMenu}
+
+{form actionFile class => ajax}
+<table n:snippet="table" class="table-file ajax">
+    <thead class="thumb">
+        <th>
+            <h2>{_'Files'} ({$countFiles})</h2>
+        </th>
+        <th class="icon">    
+            {input delete}
+            {input publish}
+            {input edit}
+            {input selectAll}
+        </th>
+    </thead>
+    <tbody class="thumb">
+        {if $countFiles > 0}
+            <tr>
+                <td colspan="2">
+                <ul n:snippet="list" class="thumb ajax">    
+                {foreach $files as $file}
+                    <li id="item_{$file->file_id}" class="{$file->state} noicon">
+                        <div class="images">
+                        {if $user->id == $file->user_id || $user->isInRole('admin')}
+                            {input select-{$file->file_id}}
+                        {/if}    
+                        {if $file->type == "image/jpeg"} <!-- update link n:href/link -->
+                            <a href="{$basePath}/{$file->path}" title="{$file->name}" class="group" rel="promo">
+                                <img src="{$basePath}/{$file->meta_path}" alt="{_'Image.'}" />
+                        {else}    
+                            <a href="{$basePath}/{$file->path}" title="{_'Download'} {$file->name}?" target="_blank">
+                                <img src="{$basePath}/images/download-file.png" alt="{_'Download?'}" />
+                        {/if}
+                                <div class="info">
+                                    <h3>{$file->name|truncate:22}</h3>
+                                    <p title="{$file->describe}">{$file->describe|truncate:66}</p>
+                                    <p class="date">{$file->group} | {$file->inserttime|date:'j. n. Y'}</p>
+                                </div>
+                            </a>
+                            </div>
+                    </li>
+                {/foreach}
+                </ul>
+                </td>
+            </tr>
+        {else}
+            <tr class="list">
+                <td colspan="4" class="nohover noicon"><p>{_'You do not have any files in this group.'} <a n:href="new" class="noblock">{_'Try upload something.'}</a></p></td>
+            </tr>
+        {/if}
+    </tbody>
+</table>
+{/form}
+
+{if $countGeneralFiles > 0}
+<table class="table-file">
+    <thead class="thumb">
+        <th>
+            <h2>{_'General Files'} ({$countGeneralFiles})</h2>
+        </th>
+    </thead>
+    <tbody class="thumb">
+        <tr>
+            <td>
+            <ul class="thumb">    
+            {foreach $generalFiles as $file}
+                <li class="{$file->state} noicon">
+                        <div class="images">
+                        {if $file->type == "image/jpeg"} <!-- update link n:href/link -->
+                            <a href="{$basePath}/{$file->path}" title="{$file->name}" class="group" rel="promo">
+                                <img src="{$basePath}/{$file->meta_path}" alt="{_'Image.'}" />
+                        {else}    
+                            <a href="{$basePath}/{$file->path}" title="{$file->name}" target="_blank">
+                                <img src="{$basePath}/images/download-file.png" alt="{_'Download?'}" />
+                        {/if}
+                            <div class="info">
+                                <h3>{$file->name|truncate:22}</h3>
+                                <p title="{$file->describe}">{$file->describe|truncate:55}</p>
+                                <p class="date">{$file->group} | {$file->inserttime|date:'j. n. Y'}</p>
+                            </div>
+                        </a>
+                        </div>
+                </li>
+            {/foreach}
+            </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{/if}
+{/block}
+
+{block head}
+    <!--Sorting-->
+    <script type="text/javascript">
+    $(function() {
+        $( "#snippet--table" ).sortable({
+            items: 'li',
+            update: function( event, ui ) {
+                var order = $(this).sortable('serialize');
+
+                $.nette.ajax({
+                     type: 'POST',
+                     url: {link order! $pageId},
+                     data: order
+                });
+            }
+        });
+
+       $( "#snippet--table" ).disableSelection();
+    });
+    </script>
+{/block}

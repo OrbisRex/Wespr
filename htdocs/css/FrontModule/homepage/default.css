@@ -1,0 +1,310 @@
+/*
+    Stylesheet  : WESPR - Homepage
+    Module      : Front
+    Created on  : 12.04.2014, 19:33:34
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*/Homepage/////////////////////////////////////////////////////////////////////*/
+
+/*News area*/
+section .news {
+    position: relative;
+    height: 100vh;
+    text-align: left;
+    background-color: rgb(180,190,255);
+    margin: 0;
+}
+
+section .news a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+section .news #slideshow {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+}
+
+section .news #slideshow div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.0;
+}
+
+section .news #slideshow div.active {
+    z-index: 123;
+    opacity: 1.0;
+}
+
+section .news  #slideshow div.last-active {
+    z-index:122;
+}
+
+section .news .logo {
+    position: absolute;
+    top: 15%;
+    right: 8%;
+    display: block;
+    width: auto;
+    height: auto;
+    z-index: 1234;
+}
+
+section .news .logo a {
+    font-size: 6em;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: -0.1em;
+    text-decoration: none;
+}
+
+.logo-e {
+    color: rgb(255,255,255);
+}
+
+section .news .logo p {
+    position: relative;
+    top: -1.2em;
+    font-size: 2em;
+    font-style: italic;
+    letter-spacing: 0;
+    text-align: right;
+    color: rgb(255,255,255);
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+
+section .news .article {
+    position: absolute;
+    display: block;
+    bottom: 15%;
+    left: 0;
+    width: 100vw;
+    background: rgba(30, 30, 30, 0.3);
+    padding: 0;
+    margin: 0;
+    z-index: 124;
+}
+
+section.news .article h1 {
+    display: inline-block;
+    width: 90vw;
+    font-size: 4vw;
+    text-align: center;
+    letter-spacing: 0.8vw;
+    color: rgb(255,255,255);
+    margin: 0;
+    padding: 0 5vw;
+}
+
+section.news .article p {
+    display: inline-block;
+    width: 90vw;
+    font-size: 2vw;
+    text-align: center;
+    color: rgb(255,255,255);
+    margin: 0;
+    padding: 0 5vw;
+}
+
+section .news .article a {
+    display: inline;
+}
+
+section .news a:hover {
+    color: rgb(255,255,255);
+}
+
+section .news .slide-control {
+    position: absolute;
+    display: block;
+    bottom: 5vh;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    z-index: 124;
+}
+
+section .news .slide-control a {
+    display: inline;
+    color: rgb(255,255,255);
+    font-size: 2vw;
+    letter-spacing: 1vw;
+    text-decoration: none;
+}
+
+section .news .slide-control a:hover {
+    color: rgb(255,100,0);
+}
+
+/*Content*/
+#content section.articles  {
+    width: 100vw;
+    min-height: 50vh;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+#content section.articles section.article {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+#content section.articles div.article-text {
+    display: inline-block;
+    width: 65vw;
+    min-height: 50vh;
+    padding: 25vh 5vw 25vh 0;
+}
+
+#content section.articles h1 {
+    color: rgb(255, 100, 0);
+    padding: 10px 5vh 10px 5vh;
+}
+
+#content section.articles h2 {
+    padding: 20px 5vh 0 5vh;
+}
+
+#content section.articles p {
+    color: rgb(100,100,100);
+    padding: 8px 5vh;
+}
+
+#content section.articles img {
+    display: inline-block;
+    padding: 0;
+    margin: 2vh;
+}
+
+/*Grey Section ///////////////////////////////////////////////*/
+#content section.articles #resources,
+#content section.articles #online-price,
+#content section.articles #online-subjects
+{
+    background: rgb(100,100,100);
+}
+
+#content section.articles #resources div.article-text,
+#content section.articles #online-price div.article-text,
+#content section.articles #online-subjects div.article-text
+ {
+      display: inline-block;
+      width: 65vw;
+      min-height: 50vh;
+      padding: 25vh 5vw 25vh 0;
+}
+
+#content section.articles #resources h1,
+#content section.articles #online-price h1,
+#content section.articles #online-subjects h1
+{
+      color: rgb(255,100,0);
+}
+
+#content section.articles #resources h2,
+#content section.articles #online-price h2,
+#content section.articles #online-subjects h2
+{
+      color: rgb(255,255,255);
+}
+
+#content section.articles #resources ul,
+#content section.articles #online-price ul,
+#content section.articles #online-subjects ul
+{
+    display: block;
+    list-style-type: square;
+    padding-inline-start: 7vh;
+    color: rgb(255,255,255);
+}
+
+#content section.articles #resources p,
+#content section.articles #online-price p,
+#content section.articles #online-subjects p
+{
+    color: rgb(255,255,255);
+}
+
+#content section.articles #resources a,
+#content section.articles #online-price a,
+#content section.articles #online-subjects a
+{
+    color: rgb(255,100,0);
+}
+
+#content section.articles #resources a:hover,
+#content section.articles #online-price a:hover,
+#content section.articles #online-subjects a:hover
+{
+    color: rgb(255,255,255);
+}
+
+#content section.articles #resources img,
+#content section.articles #online-price img,
+#content section.articles #online-subjects img
+{
+      display: block;
+      width: 20vw;
+      padding: 5vh 0;
+      margin: auto;
+}
+
+/*section.articles h1+p:first-letter {
+    font-size: 3em;
+    line-height: 0.5em;
+    margin: 0.1em 0.15em 0em 0em;
+    float: left;
+}*/
+
+/*Images*/
+#content section.articles .main-images {
+    display: inline-block;
+    width: 30vw;
+    padding: 25vh 0;
+    margin: 0;
+    float: right;
+}
+
+#content section.articles .main-images.left {
+    float: left;
+}
+
+#content section.articles .main-images img {
+    display: block;
+    width: 20vw;
+    margin: auto;
+    padding-top: 5vh;
+}
+
+#content .gallery {
+    display: block;
+    margin: 20px 0px;
+    padding: 0px;
+    clear: both;
+}
+
+#content .gallery a {
+    display: inline-block;
+    margin: 15px 15px 15px 3px;
+    padding: 10px;
+    border: 1px solid rgb(200,200,200);
+}

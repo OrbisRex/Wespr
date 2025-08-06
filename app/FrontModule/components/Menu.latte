@@ -1,0 +1,11 @@
+{block menu}
+<div class="menu_box">
+    <div id="area_menu">
+        <ul>
+        {foreach $menu as $menuItem}
+            <li {ifCurrent Article:default type => $menuItem->id}class="current"{/ifCurrent}><a href="{link Article:default type => $menuItem->id}">{$menuItem->alias}</a></li>                    
+        {/foreach}
+        </ul>
+    </div>
+</div>
+{/block}

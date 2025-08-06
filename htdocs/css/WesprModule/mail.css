@@ -1,0 +1,520 @@
+/* 
+    Stylesheet  : WESPR - Email
+    Created on  : 5.11.2014
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*General ////////////////////////////////////////////////////////////////////////*/
+html {
+    position: static;
+    top: 0px;
+    left: auto;
+    width: 979px;
+    height: auto;
+    font: 16px/1.5 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
+    font-size: 1em;
+    color: rgb(0,0,0);
+    margin: auto;
+    background: rgb(255,255,255);
+    /*border: 3px solid orange;*/
+}
+
+h1,h2,h3 {
+    color: rgb(0,0,0);
+    margin: 0px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+p {
+    font-size: 1em;
+}
+
+ul {
+    margin: 0;
+}
+
+a {
+    color: rgb(100,100,100);
+    text-decoration: underline;
+}
+
+a:hover {
+    color: rgb(0,0,0);
+    text-decoration: none;
+}
+
+a[href^="error:"] {
+	background: red;
+	color: white;
+}
+
+* > :last-child { 
+    margin-right: 0;
+}
+
+/*Header area ////////////////////////////////////////////////////////////////*/
+#header {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    height: 100px;
+    bottom: 0px;
+    padding: 5px;
+    /*border: 1px solid red;*/
+}
+
+img.logo {
+    margin-top: 1em;
+    margin-right: 1em;
+    float: right;
+    border: 0;
+}
+
+/*Menu area //////////////////////////////////////////////////////////////////*/
+#menuline {
+    height: 47px;
+    margin: auto;
+}
+
+#menuline ul {
+    position: relative;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+    padding: 0;
+    border-bottom: 5px solid rgb(0,0,0);
+}
+
+#menuline li {
+    display: inline-block;
+    width: 17%;
+    font-size: 1.3em;
+    text-align: center;
+    list-style: none;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+    border: 5px solid rgb(0,0,0);
+    border-radius: 3px;
+}
+
+#menuline li.long {
+    width: 48%;
+}
+
+#menuline li.home {
+    width: 5%;
+    vertical-align: middle;
+}
+
+#menuline li.home a, #menuline li.home a:hover {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    padding: 7% 0;
+}
+
+#menuline li.home img {
+    vertical-align: middle;
+}
+
+#menuline li.info {
+    padding: 0.5%;
+}
+
+#menuline li.text a,#menuline li.file a,#menuline li.setting a,#menuline li.logout a, #menuline li.user a, #menuline li.user-current a, #menuline li.sign a,
+#menuline li.text-current a, #menuline li.file-current a, #menuline li.setting-current a, #menuline li.sign-current a {
+    display: block;
+    width: 94%;
+    height: auto;
+    color: rgb(0,0,0);
+    text-decoration: none;
+    padding: 3%;
+}
+
+#menuline li.sign a, #menuline li.sign-current a {
+    width: 98%;
+    padding: 1%;
+}
+
+#menuline li.sign a:hover, #menuline li.sign-current a {
+    color: rgb(255,255,255);
+    background-color: rgb(230,0,0);
+}
+
+#menuline li.info a {
+    color: rgb(150,150,150);
+}
+#menuline li.info a:hover {
+    color: rgb(0,0,0);
+}
+
+/*Content ////////////////////////////////////////////////////////////////////*/
+#content {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    /*border: 1px solid rgb(0,0,200);*/
+}
+
+#left-area {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 72%;
+    height: auto;
+    min-height: 500px;
+    padding: 10px;
+    float: left;
+    /*border: 1px solid red;*/
+}
+
+#right-area {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 23%;
+    height: auto;
+    min-height: 500px;
+    padding: 10px;
+    margin: 10px 0px;
+    float: right;
+    background-color: rgb(230,230,230);
+    border-radius: 3px;
+    border: 1px solid rgb(100,100,100);
+}
+
+#right-area h3 {
+    font-size: 1.5em;
+    text-align: center;
+    color: rgb(100,100,100);
+    padding: 0px;
+}
+
+#right-area p {
+    font-size: 0.8em;
+    color: rgb(100,100,100);
+    padding: 5px;
+    margin: auto;
+}
+
+#right-area li {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    font-size: 0.8em;
+    color: rgb(100,100,100);
+    list-style: square outside;
+    padding: 0px;
+    margin-left: -10px;
+}
+
+/*Tables /////////////////////////////////////////////////////////////////////*/
+table {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    margin-bottom: 10px;
+    /*border: 1px solid black;*/
+}
+
+td, th {
+    position: static;
+    vertical-align: middle;
+    padding: 1px;
+    margin: 0px;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 3px;
+}
+
+th {
+    vertical-align: middle;
+    padding: 3px;
+}
+
+th.icon {
+    width: 140px;
+    min-width: 100px;
+    text-align: center;
+    padding-top: 15px;
+    vertical-align: middle;
+    background-color: rgb(220,220,220);
+}
+
+td.public {
+    background: url('images/public.png') no-repeat 0.5em;
+    border: 1px solid rgb(0,120,220);
+}
+
+td.locked {
+    background: url('images/lock.png') no-repeat 0.5em;
+    border: 1px solid rgb(0,50,100);
+}
+
+td.nonpublic {
+    background: url('images/nonpublic.png') no-repeat 0.5em;
+    border: 1px solid rgb(220,220,220);
+}
+
+td:hover {
+    background-image: none;
+}
+
+td.noicon {
+    background: inherit;
+}
+
+.icon input {
+    position: relative;
+    top: -5px;
+    left: 0px;
+    min-width: 30px;
+    width: 30px;
+    text-align: center;
+    font-size: 1.2em;
+    color: rgb(255,255,255);
+    padding: 5px;
+    margin: 3px;
+    background-color: rgb(100,100,100);
+    border: 1px solid rgb(0,0,0);
+}
+
+.icon a {
+    position: relative;
+    top: -5px;
+    left: 0px;
+    height: 25px;
+    width: 18px;
+    text-align: center;
+    font-size: 1.2em;
+    color: rgb(255,255,255);
+    padding: 4px 5px 6px 5px;
+    margin: 3px;
+    background-color: rgb(100,100,100);
+    float: left;
+    border: 1px solid rgb(0,0,0);
+    border-radius: 3px;
+}
+
+td.notes {
+    width: 30%;
+    text-align: left;
+    vertical-align: top;
+}
+
+table h2 {
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    font-size: 2em;
+    text-align: left;
+    color: rgb(0,0,0);
+    padding: 0px;
+    margin: 0px;
+}
+
+table h3 {
+    display: block;
+    width: 87%;
+    font-size: 1.4em;
+    color: rgb(0,0,0);
+    padding: 15px 1% 15px 9%;
+    margin: auto;
+}
+
+table a {
+    display: block;
+    text-decoration: none;
+}
+
+table a.noblock {
+    display: inline-block;
+    text-decoration: underline;
+}
+
+table a.noblock:hover {
+    display: inline-block;
+    text-decoration: none;
+}
+
+table p, table p.help, table p.warning, table p.error {
+    font-size: 0.9em;
+    text-decoration: none;
+    text-align: left;
+    color: rgb(100,100,100);
+    padding: 3px 1% 3px 9%;
+    margin: 0px;
+}
+
+table p.help {
+    cursor: help;    
+}
+
+table p.warning {
+    color: rgb(255,100,0);
+    cursor: help;    
+}
+
+table p.error {
+    text-decoration: line-through;
+    color: rgb(200,0,0);
+    cursor: help;    
+}
+
+table .noicon p {
+    padding: 3px;
+}
+
+/* All tables have class odd and even. */
+table .odd > td {
+    background-color: rgb(220,220,220);
+}
+table .even > td {
+    background-color: rgb(255,255,255);
+}
+
+/*Table list layout */
+tbody.list tr, tbody.thumb tr.list {
+    height: 75px;
+}
+
+tbody.list td.bottom {
+    vertical-align: bottom;
+}
+
+/*List thumb layout */
+ul.thumb {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.thumb li {
+    position: static;
+    width: 230px;
+    height: 230px;
+    padding: 3px;
+    margin: 0px;
+    list-style: none;
+    float: left;
+}
+
+ul.thumb .images {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    z-index: 1;
+}
+
+ul.thumb input {
+    position: absolute;
+    display: inline-block;
+    top: 5px;
+    left: 0px;
+    float: left;
+    z-index: 3;
+}
+
+ul.thumb .info {
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    width: 100%;
+    height: 90px;
+    padding: 0px;
+    z-index: 3;
+    background: rgba(255,255,255,0.6);
+}
+
+ul.thumb .info h3 {
+    position: static;
+    font-size: 1.1em;
+    color: rgb(0,0,0);
+    padding: 5px;
+    margin: 2px;
+    z-index: 1;
+}
+
+ul.thumb .info p, ul.thumb .info p.date {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: auto;
+    text-align: left;
+    line-height: 0.9em;
+    color: rgb(50,50,50);
+    margin: -3px 2px 2px 2px;
+}
+
+ul.thumb .info p.date {
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 0px;
+    bottom: 0px;
+}
+
+/*Footer /////////////////////////////////////////////////////////////////////*/
+
+footer {
+    display: block;
+    width: 99%;
+    height: auto;
+    padding: 1%;
+    margin: auto;
+    background-color: rgb(230,230,230);
+    border-top: 3px solid rgb(0,0,0);
+}
+
+footer .info {
+    display: inline-block;
+    width: 100%;
+}
+
+footer .info p {
+    text-align: center;
+    font-size: 0.8em;
+    color: rgb(100,100,100);
+    margin: 0px;
+    padding: 0px;
+}
+
+footer .info p.note {
+    text-align: center;
+    font-size: 0.6em;
+    color: rgb(100,100,100);
+    margin: 0px;
+    padding: 0px;
+    clear: both;
+}
+
+footer .info img {
+    padding: 10px 0px 10px 0px;
+    float: right;
+}

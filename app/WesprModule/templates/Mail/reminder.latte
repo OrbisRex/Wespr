@@ -1,0 +1,26 @@
+{* Latte template for Verification email *}
+{$title = 'Reset hesla'}
+
+{block #content}
+<section class="main">
+    <h1>Zdarvím,</h1>
+
+    <p>
+    z účtu <strong>{$email}</strong> jsem přijal požadavek na reset hesla. Doufám, že to není omyl.
+    Pokud ano, nic se neděje a klidně tento email ignorujte.
+    </p>
+    <p>
+    Pokud chcete heslo resetovat, stačí kliknout na uvedený odkaz, nebo jej nakopírovat do adresního
+    řádku vašeho prohlížeče a stisknout enter.
+    </p>
+
+    <p class="link"><a href="{$baseUri}{plink Verify:resetPassword $tag}">{$baseUri}{plink Verify:resetPassword $tag}</a></p>
+
+    <p>
+    Na otevřené stránce si zadáte nové heslo a budete se moci přihlásit.
+    </p>
+    <p>
+    Těším se na další spolupráci, WESPR
+    </p>
+</section>
+{/block}

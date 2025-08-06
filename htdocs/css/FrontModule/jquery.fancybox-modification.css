@@ -1,0 +1,22 @@
+/* 
+    Fancybox modifications
+    Created on : 12.10.2014, 22:33:23
+    Author     : David
+*/
+
+.fancybox-title-over-wrap {
+    width: 100%;
+    padding: 0;
+}
+
+.fancybox-title-over-wrap > div {
+    padding: 10px;
+}
+
+.fancybox-overlay {
+    z-index: 12345;
+}
+
+.fancybox-wrap {
+    z-index: 123456;
+}

@@ -1,0 +1,92 @@
+{*
+    Template for Code Editor & Management
+
+    Author: David Ehrlich, 2016
+    Version: 1.0
+    Licence: MIT
+*}
+
+{var $robots = noindex}
+{var $title = 'Code editor'}
+
+{block content}
+    {control settingMenu}
+
+    {form codeForm}
+        {control $form errors}
+
+        <div id="form-main">
+            {ifset $id}
+                <h2>{_'Edit code'}</h2>
+            {else}
+                <h2>{_'New code'}</h2>
+            {/ifset}
+            {label alias /}<br>{input alias} {input type}
+        </div>
+        <div id="form-add">
+            <div class="form-add-h3">
+                {ifset $id}
+                    {label cancel /}{input cancel}
+                    {label edit /}{input edit}
+                {else}
+                    {label save /}{input save}
+                {/ifset}
+            </div>
+            <span>
+             {label state /}<br>{input state}
+            </span>
+        </div>
+        <div id="form-full">
+            {label text /}<br>{input text}
+            {label code /}<br>{input code}
+        </div>
+        <div id="form-button">
+            {ifset $id}
+                {label cancel /}{input cancel}
+                {label edit /}{input edit}
+            {/ifset}
+            {label save /}{input save}
+        </div>
+    {/form}
+
+    {form codeList class => ajax}
+    <table n:snippet="table" class="table-code ajax">
+        <thead class="list">
+            <th colspan="3">
+                <h2>{_'list of itmes'} ({$countCodes})</h2>
+            </th>
+            <th colspan="1" class="icon">    
+            {if $countCodes > 0}
+                {input delete}
+                {input publish}
+                {input selectAll}
+            {/if}
+            </th>
+        </thead>
+        <tbody n:snippet="list" class="list ajax">
+            {dump $codes}
+            {if $countCodes > 0}
+                {foreach $codes as $code}
+                    <tr id="item_{$code->id}" n:class="$iterator->isOdd() ? 'odd sortable' : 'even sortable'">
+                    <td class="{$code->state}" style="width: 400px;"><a href="{plink default $code->id}"><h3>{_$code->alias}</h3></a></td>
+                    <td class="{$code->state} noicon bottom" style="width: 250px;" class="publish"><p>{_$code->text}</p></td>
+                    <td class="{$code->state} noicon bottom" style="width: 200px;">
+                        <p>{_'type'}: {$code->type}</p>
+                        <p n:if="$code->user_name">{_'username'}: {$code->user_name}</p>
+                    </td>
+
+                    <td class="bottom" style="width: 100px;">{input select-{$code->id}}</td>
+                    </tr>
+                {/foreach}
+            {else}
+                <tr>
+                    <td colspan="4" class="nohover noicon"><p>{_'Insert your first code.'}</p></td>
+                </tr>
+            {/if}
+        </tbody>
+    </table>
+    {/form}
+{/block}
+
+{block head}
+{/block}

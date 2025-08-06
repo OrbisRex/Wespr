@@ -1,0 +1,70 @@
+<div n:snippet="file-edit">
+{form actionFileEdit class => ajax}
+<table n:snippet="table" class="table-file ajax">
+    <thead class="list">
+        <th>
+            <h2>{_'seznam položek'} ({$countFiles})</h2>
+        </th>
+        <th class="icon">    
+            {input delete}
+            {input publish}
+            {input save}
+        </th>
+    </thead>
+    <tfoot>
+        <th colspan="2" class="icon">    
+            {input delete}
+            {input publish}
+            {input save}
+        </th>
+    </tfoot>
+    <tbody n:snippet="list" class="list ajax" >
+        {if $countFiles > 0}
+            {foreach $files as $file}
+            <tr id="item_{$file->file_id}" n:class="$iterator->isOdd() ? 'odd' : 'even'">
+                <td colspan="2">
+                    {if $file->type == "image/jpeg"}
+                        <div id="item_{$file->file_id}" class="{$file->state} images">
+                            {input select-{$file->file_id} }
+                            <img src="{$basePath}/{$file->meta_path}" alt="{$file->name|truncate:20}" />
+                            <div class="info">
+                                <h3>{$file->name|truncate:20}</h3>
+                                <p title="{$file->describe}">{$file->describe|truncate:55}</p>
+                                <p class="date">{$file->inserttime|date:'j. n. Y'}</p>
+                            </div>
+                        </div>
+                        <div class="list-form">
+                            {label fileName-{$file->file_id} /}
+                            <p class="note">{_'More than one tag separate by space.'}</p>
+                            {input fileName-{$file->file_id} } {input tags-{$file->file_id} }<br>
+                            {label description-{$file->file_id} /}<br />{input description-{$file->file_id} }
+                        </div>
+                    {else}    
+                        <div id="item_{$file->file_id}" class="{$file->state} images">
+                            {input select-{$file->file_id} }
+                            <img src="{$basePath}/images/download-file.png" title="{_'Soubor lze stáhnout a otevřít v počítači.'}" alt="{$file->name|truncate:20}" />
+                            <div class="info">
+                                <h3>{$file->name|truncate:20}</h3>
+                                <p title="{$file->describe}">{$file->describe|truncate:55}</p>
+                                <p class="date">{$file->inserttime|date:'j. n. Y'}</p>
+                            </div>
+                        </div>
+                        <div class="list-form">
+                            {label fileName-{$file->file_id} /}
+                            <p class="note">{_'More than one tag separate by space.'}</p>
+                            {input fileName-{$file->file_id} } {input tags-{$file->file_id} }<br>
+                            {label description-{$file->file_id} /}<br />{input description-{$file->file_id} }
+                        </div>
+                    {/if}
+                </td>
+            </tr>
+            {/foreach}
+        {else}
+            <tr>
+                <td colspan="2">{_'Nenalezl jsem žádnou položku.'} <a href="{plink File:new}" class="noblock">{_'Zkuste něco přidat'}</a>. {_'Neuložený obsah článku bude ztracen!'}</td>
+            </tr>
+    {/if}
+    </tbody>
+</table>
+{/form}
+</div>

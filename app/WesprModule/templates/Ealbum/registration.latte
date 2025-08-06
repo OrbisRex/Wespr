@@ -1,0 +1,32 @@
+{var $robots = noindex}
+{var $title = 'Registration'}
+
+{block #content}
+    {form registrationForm}
+        {control $form errors}
+
+        <div id="form-main">
+            {ifset $id}
+                <h2>{_'User Account'}</h2>
+            {else}
+                <h2>{_'New user'}</h2>
+            {/ifset}
+            {label name /}<br />{input name}<br />
+            {label email /}
+            <p class="note">{_'Your email is also your user name.'}</p>
+            {input email}
+        </div>
+        <div id="form-add">
+            <div class="form-add-h3">
+            </div>
+            {label nickname /}<br />{input nickname}
+            {label password /}
+            <p class="note">{_'Password should has at least 6 characters.'}</p>
+            {input password}
+            {input verifyPassword}
+        </div>
+        <div id="form-button">
+            {label save /}{input save}
+        </div>
+    {/form}
+{/block}

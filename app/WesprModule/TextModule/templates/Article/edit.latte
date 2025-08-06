@@ -1,0 +1,122 @@
+{var $robots = noindex}
+{var $title = 'Edit text'}
+
+{block #content}
+    {control articleMenu}
+
+    {form articleForm}
+        {control $form errors}
+
+        <div id="form-main">
+            <h2>{_'Edit text'}</h2>
+            {label title /}<br />{input title autofocus => true} {input pages}
+        </div>
+
+        <div id="form-add">
+            <div class="form-add-h3">
+                {label cancel /}{input cancel}
+                {label edit /}{input edit}
+            </div>
+            <div>
+                 {label state /}<br>{input state} <span n:snippet="passcode">{var $_form = $presenter['articleForm']}{input passcode}</span>
+            </div>
+        </div>
+        <div id="form-full">
+            {label perex /}
+            <p class="note">{_'You can use Texy!.'} <a href="http://texy.info/cs/syntax" title="{_'The new windows will be opend.'}" class="component fancybox.iframe">{_'How to use it?'}</a></p>
+            {input perex}
+            
+            {label text /}
+            <p class="note">{_'You can use Texy!.'} <a href="http://texy.info/cs/syntax" title="{_'The new windows will be opend.'}" class="component fancybox.iframe">{_'How to use it?'}</a></p>            
+            {input text}
+        </div>
+        <div id="form-button">
+            {label cancel /}{input cancel}
+            {label edit /}{input edit}
+            {label save /}{input save}
+        </div>
+    {/form}
+
+    {*File managemnet*}
+    {form fileManagementForm class => 'ajax'}
+    <table n:snippet="table" class="table-file ajax">
+        <thead class="thumb">
+            <th>
+                <h2>Files ({$countFiles})</h2>
+            </th>
+            <th class="icon">    
+                {input add}
+                {if $countFiles > 0}
+                    {input delete}
+                    {input selectAll}
+                {/if}
+            </th>
+        </thead>
+        <tfoot>
+            <th colspan="2" class="icon">    
+                {input add}
+                {if $countFiles > 0}
+                    {input delete}
+                    {input selectAll}
+                {/if}
+            </th>
+        </tfoot>
+        <tbody>
+            {if $countFiles > 0}
+                <tr>
+                    <td  colspan="2" class="nohover">
+                    <ul n:snippet="list" class="thumb ajax">    
+                    {foreach $files as $fileItem}
+                        <li id="item_{$fileItem->id}">
+                            <div id="item_{$fileItem->id}" class="images">
+                            {input select-{$fileItem->id}}
+                            {if $fileItem->type == "image/jpeg"}
+                                <a href="{$basePath}/{$fileItem->path}" title="{_'I am showing an original picture.'}" class="group" rel="promo">
+                                    <img src="{$basePath}/{$fileItem->meta_path}" alt="{_'Image.'}" />
+                            {else}    
+                                <a href="{$basePath}/{$fileItem->path}" title="{_'Download.'}">
+                                    <img src="{$basePath}/images/download-file.png" alt="{_'Download?'}" />
+                            {/if}
+                                <div class="info">
+                                    <h3>{$fileItem->name|truncate:20}</h3>
+                                    <p>{$fileItem->describe|truncate:50}</p>
+                                    <p class="date">{$fileItem->inserttime|date:'j. n. Y'}</p>
+                                </div>
+                                </a>
+                            </div>
+                        </li>
+                    {/foreach}
+                    </ul>
+                    </td>
+                </tr>
+            {else}
+                <tr>
+                    <td colspan="2" class="nohover noicon"><p>{_'To add files into the article press "+".'}</p></td>
+                </tr>
+        {/if}
+        </tbody>
+    </table>
+    {/form}
+    
+    {*Pack of components for filemanagement*}
+    <div id="add-file" style="display: none">
+        <a name="select-file"></a>
+        {control fileSelect}
+    </div>
+    
+{/block}
+
+{block head}
+<script type="text/javascript">
+    $(function() {
+        $( "#frm-articleForm-state" ).change(function(){
+            var source = $( "#frm-articleForm-state" ).val();
+            $.nette.ajax({
+                 type: 'POST',
+                 url: {link secure!},
+                 data: 'state='+source
+            });
+        });        
+    });
+</script>
+{/block}

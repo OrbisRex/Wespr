@@ -1,0 +1,68 @@
+<div n:snippet="file-add">
+{form addFileForm}
+    {control $form errors}
+
+    <div id="form-main">
+        <h2>{_'New File'}</h2>
+        {label path /}<br />{input path, autofocus => true}
+        <p class="lower-note">{_'You can choose more than one file if you press Ctrl.'}</p>
+    </div>
+    <div id="form-add">
+        <div class="form-add-h3">
+        </div>
+        <div>
+            {label state /}<br />{input groups} {input state}
+        </div>
+    </div>
+    {if $countFiles == 0}
+        <div class="icon">    
+            {label save /}{input save}
+        </div>
+    {/if}
+
+    {if $countFiles > 0}
+    <div n:snippet="file-select">
+        <table n:snippet="table" class="table-file ajax">
+            <thead class="thumb">
+                <th>
+                    <h2>{_'Files - include general files'} ({$countFiles})</h2>
+                </th>
+                <th class="icon">    
+                    {label save /}{input save}
+                </th>
+            </thead>
+            <tfoot>
+                <th colspan="2" class="icon">    
+                    {label save /}{input save}
+                </th>
+            </tfoot>
+            <tbody class="thumb">
+                <tr>
+                    <td colspan="2">
+                    <ul class="thumb ajax">    
+                    {foreach $files as $file}
+                        <li id="item_{$file->file_id}">
+                            <div class="images">
+                            {input select-{$file->file_id}}
+                            {if $file->type == "image/jpeg"}
+                                <img src="{$basePath}/{$file->meta_path}" alt="{$file->name|truncate:20}" />
+                            {else}    
+                                <img src="{$basePath}/images/download-file.png" alt="{$file->name|truncate:20}" />
+                            {/if}
+                                <div class="info">
+                                    <h3>{$file->name|truncate:20}</h3>
+                                    <p>{$file->describe|truncate:60}</p>
+                                    <p class="date">{$file->inserttime|date:'j. n. Y'}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {/foreach}
+                    </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {/if}
+{/form}
+</div>

@@ -1,0 +1,26 @@
+{* Latte template for Verification email *}
+{$title = 'Dokončení registrace'}
+
+{block #content}
+<section class="main">
+    <h1>Vítej {$name}</h1>
+
+    <p>
+    z účtu <strong>{$email}</strong> jsem přijal požadavek na ověření. Doufám, že to není omyl a díky za to!
+    Nyní je třeba vaš účet ověřit. Pokud tak neučiníte, <strong>neumožním vám publikovat obsah.</strong>.
+    </p>
+    <p>
+    Naštěstí je potvrzení snadné. Stačí kliknout na uvedený odkaz, nebo jej nakopírovat do adresního
+    řádku vašeho prohlížeče a stisknout enter.
+    </p>
+
+    <p class="link"><a href="{$baseUri}{plink Verify:account $tag}">{$baseUri}{plink Verify:account $tag}</a></p>
+
+    <p>
+    Dozvíte se jak celý proces proběhl a budete se moci přihlásit. Je to snadné.
+    </p>
+    <p>
+    Těším se na další spolupráci, WESPR
+    </p>
+</section>
+{/block}

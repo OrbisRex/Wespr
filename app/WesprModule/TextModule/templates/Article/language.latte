@@ -1,0 +1,37 @@
+{var $robots = noindex}
+
+{var $title = 'Translation'}
+
+{block #content}
+    {control articleMenu}
+    
+    {form translationForm}
+        {control $form errors}
+
+        <div id="form-main">
+            <h2>Text translation</h2>
+            {label titleDefault /}<br />{input titleDefault}
+            {label perexDefault /}<br />{input perexDefault}
+            {label textDefault /}<br />{input textDefault}
+            <p class="note">{_'You can use '} <strong>Texy!</strong>. <a href="http://texy.info/cs/syntax" title="{_'The new windows will be opend.'}" class="component fancybox.iframe">How to use it?</a></p>
+        </div>
+        <div id='form-add'>
+            <div class="form-add-h3">
+                <h3>Translate to [{$lang}]</h3>
+                {label cancel /}{input cancel}
+                {label translation /}{input translation}
+            </div>
+            {label titleTranslation /}<br />{input titleTranslation autofocus => true}
+            {label perexTranslation /}<br />{input perexTranslation}<br />
+            {label textTranslation /}<br />{input textTranslation}
+        </div>
+
+        <div id="form-button">
+            {label cancel /}{input cancel}
+            {label translation /}{input translation}
+        </div>
+    {/form}
+{/block}
+
+{block head}
+{/block}

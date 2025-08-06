@@ -1,0 +1,115 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+parameters:
+	defaultLang: en
+
+php:
+	date.timezone: Europe/Prague
+	# zlib.output_compression: yes
+
+application:
+        errorPresenter: Error
+        mapping:
+                *: App\*Module\*Presenter
+
+session:
+        expiration: 14 days
+
+mail:
+        smtp: true
+        host: kikimora.laddobar.cz
+        port: 587
+        username: noreply@some-email.cz
+        password: N0r3plY
+        secure: tls
+
+services:
+	authorizator:
+		class: Nette\Security\Permission
+		setup:
+			#Roles
+			- addRole('guest')
+			- addRole('user')
+			- addRole('member', 'user')
+			- addRole('translator')
+			- addRole('editor')
+			- addRole('admin')
+                        
+			#Resources
+			- addResource('Wespr:Default')
+			- addResource('Wespr:Text:Article')
+			- addResource('Wespr:Text:Event')
+			- addResource('Wespr:Text:News')
+			- addResource('Wespr:File:New')
+			- addResource('Wespr:File:Import')
+			- addResource('Wespr:File:File')
+			- addResource('Wespr:User')
+			- addResource('Wespr:Sing')
+			- addResource('Wespr:Settings')
+			- addResource('Wespr:Group')
+			- addResource('Wespr:Page')
+			- addResource('Wespr:Layout')
+			- addResource('Wespr:Code')
+			- addResource('Wespr:Verify')
+			- addResource('Wespr:Mail')
+
+			#Privilegs
+			- allow('user')
+			- allow('member')
+			- allow('editor')
+			- allow('admin')
+
+			- deny('user', 'Wespr:Text:Event')
+			- deny('user', 'Wespr:Layout')
+			- deny('user', 'Wespr:Text:News')
+			- deny('user', 'Wespr:Code')
+
+	#Component Factories
+	- App\WesprModule\FileModule\IFileManagerControlFactory
+	- App\WesprModule\FileModule\IFileNewControlFactory
+	- App\WesprModule\FileModule\IFileImportControlFactory
+	- App\WesprModule\FileModule\IFileEditControlFactory
+	- App\WesprModule\FileModule\IFileSelectControlFactory
+
+	#WESPR Core
+	- App\WesprModule\UserManager
+	- App\WesprModule\MailManager
+
+	- App\WesprModule\Repository\ModifyPageRepository
+	#- App\WesprModule\Repository\ModifyLayoutRepository
+	- App\WesprModule\Repository\ModifySourceRepository
+	- App\WesprModule\Repository\ModifyCodeRepository
+	- App\WesprModule\Repository\ModifyGroupRepository
+	- App\WesprModule\Repository\ModifyUserRepository
+	- App\WesprModule\Repository\ModifyUserAuthorityRepository
+	- App\WesprModule\Repository\ModifyTagRepository
+	- App\WesprModule\Repository\EalbumRepository
+        
+	#Text Module
+	- App\WesprModule\TextModule\Repository\ModifyEventRepository
+	- App\WesprModule\TextModule\Repository\ModifyArticleRepository
+	- App\WesprModule\TextModule\Repository\ModifyArticlePageRepository
+	- App\WesprModule\TextModule\Repository\ModifyArticleFileRepository
+	
+	#File Module
+	- App\WesprModule\FileModule\Repository\ModifyFileRepository
+	- App\WesprModule\FileModule\Repository\ModifyFileMetaRepository
+	- App\WesprModule\FileModule\Repository\ModifyFileGroupRepository
+	- App\WesprModule\FileModule\Repository\ModifyFileTagRepository
+
+	WesprTranslator:
+		class: OrbisRex\Wespr\Translator(%defaultLang%)
+		setup:
+			- setPath('../wespr/app/WesprModule/Translations')
+
+	FrontModule:
+		class: App\WesprModule\Repository\ModifyLayoutRepository()
+		setup:			
+			- setFrontModuleName('FrontModule')
+
+	- App\RouterFactory
+	router: @App\RouterFactory::createRouter

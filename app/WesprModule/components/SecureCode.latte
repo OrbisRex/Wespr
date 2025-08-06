@@ -1,0 +1,13 @@
+<div id="secure-code" style="display: none">
+{form secureCodeForm}
+    {control $form errors}
+
+    <div id="form-main">
+        {label code /}
+        <p class="note">{_'Kód by měl mít alespoň 3 znaky.'}</p>
+        {input code}
+    </div>
+    <div id="form-button">
+        {input send}
+    </div>
+{/form}

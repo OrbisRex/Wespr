@@ -1,0 +1,105 @@
+{*
+    Template for Template Management
+
+    Author: David Ehrlich, 2015
+    Version: 1.0
+    Licence: MIT
+*}
+
+{var $robots = noindex}
+{var $title = 'Template Management'}
+
+{block content}
+    {control settingMenu}
+    
+    {form layoutForm}
+        {control $form errors}
+        
+        <div id="form-main">
+            {ifset $id}
+                <h2>{_'Edit Template'}</h2>
+            {else}
+                <h2>{_'Import Template'}</h2>
+            {/ifset}
+            {ifset $id}
+                {label layoutFile /}
+                <p class="warning">{_'New template names have to be same as the current.'}</p>
+                {input layoutFile, autofocus => true}
+                <h3>{_'Template Files'}</h3>
+                <ul class="note">
+                    <li n:foreach="$editSource as $source">{$source->path}</li>
+                </ul>
+            {else}
+                {label layoutFile /}
+                <p class="note">{_'You can choose more than one file if you press Ctrl.'}</p>
+                {input layoutFile, autofocus => true}<br>
+                {label description /}<br>{input description}
+            {/ifset}
+        </div>
+        <div id="form-add">
+            <div class="form-add-h3">
+                {ifset $id}
+                    {label cancel /}{input cancel}
+                    {label edit /}{input edit}
+                {else}
+                    {label save /}{input save}
+                {/ifset}
+            </div>
+            {label alias /}
+            <p class="note">{_'I will create a name of template from the file name when this field is empty.'}</p>
+            {input alias}<br>
+            {label state /}<br>
+            {input state}{input delegating}
+        </div>
+
+        <div id="form-button">
+                {ifset $id}
+                    {label cancel /}{input cancel}
+                    {label edit /}{input edit}
+                {else}
+                    {label save /}{input save}
+                {/ifset}
+        </div>
+    {/form}
+    
+    {form layoutList class => 'ajax'}
+    <table n:snippet="table" class="table-layout ajax">
+        <thead class="list">
+            <th colspan="3">
+                <h2>{_'Templates'} ({$countLayouts})</h2>
+            </th>
+            <th colspan="1" class="icon">    
+            {if $countLayouts > 0}
+                {input delete}
+                {input publish}
+                {input selectAll}
+            {/if}
+            </th>
+        </thead>
+        <tbody n:snippet="list" class="list ajax">
+            {if $countLayouts > 0}
+                {foreach $layouts as $layout}
+                    <tr id="item_{$layout->id}" n:class="$iterator->isOdd() ? 'odd sortable' : 'even sortable'">
+                        <td class="{$layout->state}" style="width: 400px;"><a href="{plink default $layout->id}"><h3>{_$layout->alias}</h3></a></td>
+                        <td class="{$layout->state} noicon bottom" style="width: 250px;">
+                            <p>{_'type'}: {$layout->name}</p>
+                            <p>{_$layout->description}</p>
+                        </td>
+                        <td class="{$layout->state} noicon bottom" style="width: 200px;">
+                            <p n:foreach="$sources[$layout->id] as $source">{pathinfo($source->path, PATHINFO_BASENAME)}</p>
+                        </td>
+                    <td class="bottom" style="width: 100px;">{input select-{$layout->id}}</td>
+                    </tr>
+                {/foreach}
+            {else}
+                <tr>
+                    <td colspan="4" class="nohover noicon"><p>{_'Web is not activated. Upload new template for activation.'}</p></td>
+                </tr>
+            {/if}
+        </tbody>
+    </table>
+    {/form}
+{/block}
+
+{block head}
+{/block}

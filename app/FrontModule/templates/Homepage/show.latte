@@ -1,0 +1,22 @@
+<a name="content"></a>
+{block content}
+<div id="content_container">
+    {*Article Preview*}
+    <section class='Blogs'>
+    {if count($article)}
+        <a name="blogs"></a>
+        <div n:foreach="$article as $item" class="article">
+            {!$item->perex|texy}
+            {!$item->text|texy}
+        </div>
+    {else}
+        <p class='notice'>{_'Ups. I cannot find any article. Please try it again later.'}</p>
+    {/if}
+    <p class="add"><a href="#top">^</a></p>
+    </section>
+</div>
+{/block}
+        
+{block head}
+    <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/FrontModule/blog/show.css" type="text/css">
+{/block}

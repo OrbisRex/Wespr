@@ -1,0 +1,81 @@
+{var $robots = noindex}
+{var $title = 'Article Management'}
+
+{block #content}
+    {control articleMenu}
+    
+    {form actionArticle class => ajax}
+    <table n:snippet="table" class="table-article ajax">
+        <thead class="list">
+            <th colspan="3">
+                <h2>{_'Articles'} ({$countArticles})</h2>
+            </th>
+            <th colspan="1" class="icon">    
+                {input delete}
+                {input publish}
+                {input selectAll}
+            </th>
+        </thead>
+        <tbody n:snippet="list" class="list ajax">
+              {if $countArticles > 0}
+                {dump $articles}
+                {foreach $articles as $article}
+                <tr id="item_{$article->article_id}" n:class="$iterator->isOdd() ? 'odd sortable' : 'even sortable'">
+                    <td style="width: 400px;" class="{$article->state}"><a n:href="Article:edit $article->article_id"><h3>{$article->title}</h3><p>{$article->perex|truncate:100}</p></a></td>
+                    <td class="{$article->state} noicon bottom" style="width: 260px;">
+                        {if $article->page_state == null}
+                            <p class="error" title="{_'Page is faulty. Please chaeck the page state.'}">{$article->page}</p>
+                        {elseif $article->page_state == 'nonpublic'}
+                            <p class="warning" title="{_'Please publish the page.'}">{$article->page}</p>
+                        {elseif $article->page_state == 'locked'}
+                            <p class="warning" title="{_'Page is locked up by password.'}">{$article->page}</p>
+                        {elseif $article->page_state == 'link'}
+                            <p class="warning" title="{_'Page is accessible only via link.'}">{$article->page}</p>
+                        {else}
+                            <p class="help" title="{_'Page is OK and published.'}"><a n:href="Article:default $article->page_id">{$article->page}</a></p>
+                        {/if}
+                        <p>({_$article->inserttime|date:'j. n. Y'})</p>
+                        {if $article->state == 'locked'}<p>Passcode: {$article->passcode}</p>{/if}
+                        {if $article->state == 'link'}<p title="{_'Copy the link to share the text.'}">{label link-{$article->article_id} /} {input link-{$article->article_id} }  </p>{/if}
+                    </td>
+                    <td class="bottom noicon" style="width: 150px;">
+                        <p>
+                        {foreach $langs as $lang}
+                            [<a n:href="language $article->article_id, $lang" class="noblock">{$lang}</a>]
+                        {/foreach}
+                        </p>    
+                    </td>
+                    <td class="bottom" style="width: 140px;">{if $user->id == $article->user_id || $user->isInRole($article->delegating) || $user->isInRole('admin')}{input select-{$article->article_id}}{/if}</td>
+                </tr>
+                {/foreach}
+            {else}
+                <tr>
+                    <td colspan="4" class="nohover noicon"><p><a n:href="new" class="noblock">{_'Add your new article.'}</a></p></td>
+                </tr>
+            {/if}
+        </tbody>
+    </table>
+    {/form}
+{/block}
+
+{block head}
+    <!--Sorting-->
+    <script type="text/javascript">
+    $(function() {
+        $( "#snippet--table" ).sortable({
+            items: 'tr.sortable',
+            update: function( event, ui ) {
+                var order = $(this).sortable('serialize');
+
+                $.nette.ajax({
+                     type: 'POST',
+                     url: {link order! $pageId},
+                     data: order
+                });
+            }
+        });
+
+       $( "#snippet--table" ).disableSelection();
+    });
+    </script>
+{/block}

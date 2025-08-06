@@ -1,0 +1,62 @@
+{var $robots = noindex}
+{var $title = 'Account'}
+
+{block #content}
+    {control settingMenu}
+    
+    {form userForm}
+        {control $form errors}
+        
+        <div id="form-main">
+            {ifset $id}
+                <h2>{_'Edit Account'}</h2>
+            {else}
+                <h2>{_'New User'}</h2>
+            {/ifset}
+            {label name /}
+            <p class="note">{_'Your real name is private.'}</p>
+            {input name}<br>
+            {label email /}
+            <p class="note">{_'Email is also your login name.'}</p>
+            {input email}
+        </div>
+        <div id="form-add">
+            <div class="form-add-h3">
+                {ifset $id}
+                    {label cancel /}{input cancel}
+                    {label edit /}{input edit}
+                {else}
+                    {label save /}{input save}
+                {/ifset}
+            </div>
+            {label nickname /}
+            <p class="note">{_'To change your password enter your current one.'}</p>
+            {input nickname}
+            {input oldPassword}
+            <br>
+            {label newPassword /}
+            <p class="note">{_'Password should have at least 6 characters.'}</p>
+            {input newPassword}
+            {input verifyPassword}
+        </div>
+        {if count($authorities) != 0}
+            <div id="form-full">
+                <h4>{_'Restrictions for Free User Account'}</h4>
+                <ul n:foreach="$authorities as $authority">
+                    <li>{$authority->description} {if is_numeric($authority->value)} ({_'Limit:'} {$authority->value}){/if}</li>
+                </ul>
+            </div>
+        {/if}
+        <div id="form-button">
+            {ifset $id}
+                {label cancel /}{input cancel}
+                {label edit /}{input edit}
+            {else}
+                {label save /}{input save}
+            {/ifset}
+        </div>
+    {/form}
+{/block}
+
+{block head}
+{/block}

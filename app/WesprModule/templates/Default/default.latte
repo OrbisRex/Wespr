@@ -1,0 +1,49 @@
+{var $robots = noindex}
+{var $title = 'Homepage'}
+
+{block #content}
+<section id="main-area">
+    <h1>{_'Welcome back'} {$user->getIdentity()->name}</h1>
+    <p>{_'WESPR is a simple and easy to use web content management system.'}</p>
+    
+    <div id="homepage-button-text">
+        <a n:href=":Wespr:Text:Article:new">{_'Texts'}</a>
+    </div>
+    <div id="homepage-button-file">
+       <a n:href=":Wespr:File:File:default">{_'Files'}</a>
+    </div>
+    <div id="homepage-button-settings">
+        <a n:href=":Wespr:Settings:">{_'Settings'}</a>
+    </div>    
+</section>    
+    
+<section id="status-area">
+    {if $user->identity->state == 'unprove'}
+        <p><span style="color: rgb(250,100,0);">{_'User account is not verified.'}</span>
+        <p>{_'You can insert content without publishing.'}</p>
+        <p><strong>{_'Solution:'}</strong> {_'Please check your email box and click on the verification link to finish verification.'}</p>
+    {elseif $user->identity->state == 'public'}
+        <p><span style="color: rgb(0,200,0);">{_'User account is verified and '}</span>
+    {else}
+        <p><span style="color: rgb(200,0,0);">{_'User account failed.'}</span>
+        <p>{_'You can upload content without publishing.'}</p>
+        <p><strong>{_'Solution:'}</strong> {_'Please drop email to admin.'} <a href="mailto:podpora@some-email.cz">{_'[Podpora]'}</a></p>
+    {/if}
+
+    {if $countAllPages === 0}
+        <span style="color: rgb(200,0,0);">{_'web has not been activated.'}</span></p>
+        <p n:if="$user->identity->role == 'admin'">{_'WESPR does not contain any template or template is not public. Please check if you have uploaded template.'} [<a n:href=":Wespr:Layout:">{_'Solution'}</a>]</p>
+        <p n:if="$user->identity->role != 'admin'">{_'WESPR does not contain any accessible pages. Please check if you have got access to published page.'} [<a n:href=":Wespr:Page:">{_'Solution'}</a>]</p>    
+        <p>[<a href="mailto:podpora@some-email.cz">{_'You always can drop an email to admin.'}</a>]</p>
+    {elseif $countActivedPages === 0}
+        <span style="color: rgb(250,100,0);">{_'web has not been published.'}</span></p>
+        <p n:if="$user->identity->role == 'admin'">{_'Your pages has not been published. Please check if you have got public page.'} [<a n:href=":Wespr:Page:">{_'Solution.'}</a>]</p>
+        <p n:if="$user->identity->role != 'admin'">{_'Your pages has not been published. Please check if you have got public page.'} [<a href="mailto:podpora@some-email.cz">{_'Please drop an email to admin.'}</a>]</p>    
+    {else}    
+        <span style="color: rgb(0,200,0);">{_'web is activated.'}</span></p>
+    {/if}
+</section>
+{/block}
+
+{block head}
+{/block}

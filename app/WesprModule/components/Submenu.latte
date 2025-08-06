@@ -1,0 +1,35 @@
+<div id="submenuline-article">
+    {if $user->isLoggedIn() && $menuName == "Wespr:Text:Article"}
+    <ul>
+        <li><a href="{link new}" {ifCurrent Article:new} class="current"{/ifCurrent}>Nový</a></li>
+        <li><a href="{link default $menuId = 0}" {ifCurrent Article:default $menuId = 0} class="current"{/ifCurrent}>Vše</a></li>
+    </ul>
+    <ul class="pages">
+        <li>Stránky: </li>
+        {ifset $submenu}
+            {foreach $submenu as $menuItem}
+                <li><a href="{link Article:default $menuItem->id}" {ifCurrent Article:default $menuItem->id} class="current"{/ifCurrent}>{$menuItem->alias}</a></li>
+            {/foreach}
+        {else}
+            <li>Nenalezl jsem žádné položky menu vaší stránky. V nastavení to můžete opravit.</li>
+        {/ifset}
+    </ul>
+    {/if}
+    
+    {if $user->isLoggedIn() && $menuName == "Wespr:File"}
+    <ul>
+        <li><a href="{link new!}" {ifCurrent new!} class="current"{/ifCurrent}>Nový</a></li>
+        <li><a href="{link all! $menuId = 0}" {ifCurrent all! $menuId = 0} class="current"{/ifCurrent}>Vše</a></li>
+    </ul>
+    <ul class="pages">
+        <li>Filtr: </li>
+        {ifset $submenu}
+            {foreach $submenu as $menuItem}
+                <li><a href="{link Article:default $menuItem->id}" {ifCurrent Article:default $menuItem->id} class="current"{/ifCurrent}>{$menuItem->alias}</a></li>
+            {/foreach}
+        {else}
+            <li>Nenalezl jsem žádné položky me{link Article:default $menuItem->id}" {ifCurrent Article:default $menuItem->id} class="current"{/ifCurrent}nu vaší stránky. V nastavení to můžete opravit.</li>
+        {/ifset}
+    </ul>
+    {/if}
+</div>

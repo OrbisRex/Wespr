@@ -1,0 +1,23 @@
+{var $robots = noindex}
+
+{var $title = 'Reset hesla'}
+
+{block #content}
+{form signReminderForm}
+    {control $form errors}
+
+    <div id="form-main">
+        <h1>Zapomenuté heslo</h1>
+        <p>
+        To se občas stává. Nevadí. Stačí, když zadáte správný email k vašemu účtu.
+        Odešlu vám zprávu, s odkazem který vám umožní heslo změnit.
+        </p>
+    </div>
+    <div id="form-add">
+        <div>{label email /}<br />{input email}</div>
+    </div>
+    <div id="form-button">
+        {input send}
+    </div>
+{/form}
+{/block}

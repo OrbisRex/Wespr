@@ -1,0 +1,49 @@
+{var $robots = noindex}
+{var $title = 'New text'}
+
+{block #content}
+    {control articleMenu}
+
+    {form articleForm}
+        {control $form errors}
+        
+        <div id="form-main">
+            <h2>{_'New text'}</h2>
+            {label title /}<br>{input title autofocus => true} {input pages}
+        </div>
+        <div id="form-add">
+            <div class="form-add-h3">
+                {label save /}{input save}
+            </div>
+            <div>
+                {label state /}<br>{input state} <span n:snippet="passcode">{input passcode}</span>
+            </div>
+        </div>
+        <div id="form-full">
+            {label perex /}
+            <p class="note">{_'You can use Texy!.'} <a href="http://texy.info/cs/syntax" title="{_'The new windows will be opend.'}" target="blank">{_'How to use it?'}</a></p>
+            {input perex}
+            {label text /}
+            <p class="note">{_'You can use Texy!.'} <a href="http://texy.info/cs/syntax" title="{_'The new windows will be opend.'}" target="blank">{_'How to use it?'}</a></p>
+            {input text}
+        </div>
+        <div id="form-button">
+            {label save /}{input save}
+        </div>
+    {/form}
+{/block}
+
+{block head}
+<script type="text/javascript">
+    $(function() {
+        $( "#frm-articleForm-state" ).change(function(){
+            var source = $( "#frm-articleForm-state" ).val();
+            $.nette.ajax({
+                 type: 'POST',
+                 url: {link secure!},
+                 data: 'state='+source
+            });
+        });        
+    });
+</script>
+{/block}

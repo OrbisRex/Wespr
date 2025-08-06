@@ -1,0 +1,72 @@
+/* 
+    Stylesheet  : WESPR - Event presenter
+    Created on  : 15.12.2014, 22:40:34
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*Menu area //////////////////////////////////////////////////////////////////*/
+#menuline li.event a:hover, #menuline li.event-current a {
+    color: rgb(255,255,255);
+    background-color: rgb(0,100,0);
+}
+
+/*Submenu area ///////////////////////////////////////////////////////////////*/
+#submenuline-event {
+    border-top: 5px solid rgb(0,100,0);
+}
+
+#submenuline-event ul li.tools {
+    border-right: 1px solid rgb(255,150,0); 
+    background: black;
+}
+
+#submenuline-event li a:hover, #submenuline-event li a.current {
+    color: rgb(0,100,0);
+}
+
+/*Forms //////////////////////////////////////////////////////////////////////*/
+textarea {
+    height: 10em;
+}
+
+#frm-eventForm .main-button:hover, .add-button:hover,
+#frm-importEventForm .main-button:hover, .add-button:hover,
+#frm-checkEventForm .main-button:hover, .add-button:hover {
+    color: rgb(255,255,255);
+    border: 1px solid rgb(50,50,50);
+    background: rgb(255,150,0);
+}
+
+/*Tables /////////////////////////////////////////////////////////////////////*/
+.table-event .icon input:hover {
+    cursor: pointer; 
+    color: rgb(0,0,0);
+    background-color: rgb(255,150,0);
+}
+
+.table-event td.public {
+    border: 1px solid rgb(255,150,0);
+}
+
+.table-event td.locked {
+    border: 1px solid rgb(200,100,0);
+}
+
+.table-event td:hover {
+    background-color: rgb(255,150,0);
+}
+
+.table-event td.nohover:hover {
+    background: inherit;
+}
+
+.table-event td p a {
+    text-decoration: underline;
+    color: rgb(100,100,100);
+}
+
+.table-event td p a:hover {
+    text-decoration: none;
+    color: rgb(0,0,0);
+}

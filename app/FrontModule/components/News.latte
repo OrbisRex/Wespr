@@ -1,0 +1,10 @@
+{block news}
+<div id="header_box">
+    {if $countEvent > 0}<h2>{!_('aktuální program')}</h2>{/if}
+    {foreach $event as $eventItem}
+        <h3>{$eventItem->name}</h3>
+        <p>{$eventItem->date|date:'j. n. Y'} / {$eventItem->time|date:'H:i'}</p>
+        <p>{$eventItem->place}</p>
+    {/foreach}
+</div>
+{/block}

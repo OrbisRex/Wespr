@@ -1,0 +1,146 @@
+{*
+    Template for Page Management
+
+    Author: David Ehrlich, 2016
+    Version: 1.0
+    Licence: MIT
+*}
+
+{var $robots = noindex}
+{var $title = 'Page Management'}
+
+{block content}
+    {control settingMenu}
+
+    {form pageForm}
+        {control $form errors}
+
+        <div id="form-main">
+            {ifset $id}
+                <h2>{_'Edit Page'}</h2>
+            {else}
+                <h2>{_'New Page'}</h2>
+            {/ifset}
+            {label alias /}<br />{input alias}<br />
+            {if $countSource != 0}
+                {label source /}
+                <p class="note">{_'If the template contains anchor, the link can point on exact part of page.'}</p>
+                {input source}
+                <span n:snippet="anchor">
+                    {var $_form = $presenter['pageForm']}
+                    {input anchor}
+                </span>
+            {/if}
+        </div>
+        <div id="form-add">
+            <div class="form-add-h3">
+                {ifset $id}
+                    {label cancel /}{input cancel}
+                    {label edit /}{input edit}
+                {else}
+                    {label save /}{input save}
+                {/ifset}
+            </div>
+            <span>
+            {label parent /}<br />{input parent} {input level}
+            </span>
+            <span>
+            {label state /}
+            <p class="note">{_'Same state will inherit objects assigned to page.'}</p>
+            {if $user->isInRole('admin')}
+                {input state}{input delegating}
+            {else}
+                {input state}
+            {/if}
+            </span>
+        </div>
+        <div id="form-full">
+            {label content /}<br />{input content}
+        </div>
+        <div id="form-button">
+            {ifset $id}
+                {label cancel /}{input cancel}
+                {label edit /}{input edit}
+            {/ifset}
+            {label save /}{input save}
+        </div>
+    {/form}
+
+    {form pageList class => 'ajax'}
+    <table n:snippet="table" class="table-page ajax">
+        <thead class="list">
+            <th colspan="3">
+                <h2>{_'Pages'} ({$countPage})</h2>
+            </th>
+            <th colspan="1" class="icon">    
+            {if $countPage > 0}
+                {input delete}
+                {input publish}
+                {input selectAll}
+            {/if}
+            </th>
+        </thead>
+        <tbody n:snippet="list" class="list ajax">
+            {if $countPage > 0}
+                {foreach $pages as $page}
+                    <tr id="item_{$page->id}" n:class="$iterator->isOdd() ? 'odd sortable' : 'even sortable'">
+
+                    <td class="{$page->state}" style="width: 350px;"><a href="{plink default $page->id}"><h3>{_$page->alias}</h3></a></td>
+                    <td class="{$page->state} noicon bottom" style="width: 200px;" class="publish"><p>{_$page->content}</p></td>
+                    <td class="{$page->state} noicon bottom" style="width: 300px;">
+                        <p>{_'place'}: {_$parents[$page->parent]}</p>
+                        {if $page->source_state === null}
+                            <p class="error" title="{_'Template should be replaced.'}">{_'template'}: {_$page->nettename} {$page->anchor}</p>
+                        {elseif $page->source_state === 'nonpublic'}
+                            <p class="warning" title="{_'Please, publish template.'}">{_'template'}: {_$page->nettename} {$page->anchor}</p>
+                        {else}
+                            <p class="help" title="{_'Template is alright.'}">{_'template'}: {_$page->nettename} {$page->anchor}</p>
+                        {/if}
+                    </td>
+
+                    <td class="bottom" style="width: 100px;">{input select-{$page->id}}</td>
+                    </tr>
+                {/foreach}
+            {else}
+                <tr>
+                    <td colspan="4" class="nohover noicon"><p>{_'Upload at least one peage for publishing.'}</p></td>
+                </tr>
+            {/if}
+        </tbody>
+    </table>
+    {/form}
+{/block}
+
+{block head}
+    <!--Sorting and slave select-->
+    <script type="text/javascript">
+    $(function() {
+        $( "#snippet--table" ).sortable({
+            items: 'tr.sortable',
+            update: function( event, ui ) {
+                var order = $(this).sortable('serialize');
+
+                $.nette.ajax({
+                     type: 'POST',
+                     url: {link order!},
+                     data: order
+                });
+            }
+        });
+
+       $( "#snippet--table" ).disableSelection();
+    });
+    
+    $(function() {
+        $( "#frm-pageForm-source" ).change(function(){
+            var source = $( "#frm-pageForm-source" ).val();
+            $.nette.ajax({
+                 type: 'POST',
+                 url: {link anchor!},
+                 data: 'source='+source
+            });
+        });
+        
+    });
+    </script>
+{/block}

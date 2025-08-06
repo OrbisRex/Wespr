@@ -1,0 +1,23 @@
+{var $robots = noindex}
+
+{var $title = 'Sign in'}
+
+{block #content}
+{form signInForm}
+    {control $form errors}
+
+    <div id="form-main">
+        <h1>{_'Welcome'}</h1>
+        <p>{_'Vítejte v jednoduché správě vašeho místa na Internetu. Přihlášení povedete zadáním registrovaného emailu a hesla.'}</p>
+    </div>
+    <div id="form-add">
+        {label email /}<br />{input email}<br />
+        {label password /}<br />{input password}
+        <p class="lower-note"><a href="{link Sign:reminder}" title="Simple. Let me send you new one.">{_'Have you forgotten your password?'}</a></p>
+        {input remember} {label remember /}
+    </div>
+    <div id="form-button">
+        {input send}
+    </div>
+{/form}
+{/block}

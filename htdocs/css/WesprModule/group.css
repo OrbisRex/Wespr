@@ -1,0 +1,82 @@
+/* 
+    Stylesheet  : WESPR - GroupPresenter
+    Created on  : 12.10.2014
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*Menu area///////////////////////////////////////////////////////////////////*/
+#menuline li.setting a:hover, #menuline li.setting-current a {
+    color: rgb(255,255,255);
+    background-color: rgb(0,120,220);
+}
+
+/*Submenu area ///////////////////////////////////////////////////////////////*/
+#submenuline-setting {
+    border-top: 5px solid rgb(0,120,220);
+}
+
+#submenuline-setting ul li.tools {
+    border-right: 1px solid rgb(0,120,220); 
+    background: black;
+}
+
+#submenuline-setting li a:hover, #submenuline-setting li a.current {
+    color: rgb(0,120,220);
+}
+
+/*Forms //////////////////////////////////////////////////////////////////////*/
+#frm-groupForm .main-button:hover, .add-button:hover {
+    color: rgb(255,255,255);
+    background: rgb(0,120,220);
+    border: 1px solid rgb(50,50,50);
+}
+
+/*Tables /////////////////////////////////////////////////////////////////////*/
+.table-group .icon input:hover {
+    cursor:pointer; 
+    color: rgb(255,255,255);
+    background-color: rgb(0,120,220);
+}
+
+.table-group td {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.table-group td.public {
+    border: 1px solid rgb(0,120,220);
+}
+
+.table-group td.locked {
+    border: 1px solid rgb(0,100,200);
+}
+
+.table-group td:hover {
+    background-color: rgba(0,120,220,0.6);
+    background-image: none;
+}
+
+.table-group td.nohover:hover {
+    background: inherit;
+}
+
+/*Table list view */
+.table-group td p a {
+    text-decoration: underline;
+    color: rgb(100,100,100);
+}
+
+.table-group td p a:hover {
+    text-decoration: none;
+    color: rgb(0,0,0);
+}
+
+.table-group .info {
+    position: static;
+    top: 0px;
+    width: auto;
+    height: 32px;
+    vertical-align: middle;
+    background: inherit;
+}

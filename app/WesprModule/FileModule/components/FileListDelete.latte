@@ -1,0 +1,65 @@
+{*
+ * WESPR: Component Template
+ * Simple file thumbs list. Needs to add calss.
+ *}
+ 
+<div n:snippet="component" {*style="display: none"*}>
+{form actionFile class => ajax}
+<table n:snippet="table" class="table-file ajax">
+    <thead class="thumb">
+        <th>
+            <h2>{_'seznam položek'} ({$countFiles})</h2>
+        </th>
+        <th class="icon">    
+            {input delete}
+            {input publish}
+            {input selectAll}
+        </th>
+    </thead>
+    <tbody class="thumb">
+        {if $countFiles > 0}
+            <tr>
+                <td colspan="2">
+                <ul n:snippet="list" class="thumb ajax">    
+                {dump $files}
+                {foreach $files as $file}
+                    <li id="item_{$file->id}" class="{$file->state} noicon">
+                        {if $file->type == "image/jpeg"} <!-- update link n:href/link -->
+                            <div class="images">
+                            {input select-{$file->id}}
+                            <a href="{$basePath}/{$file->path}" title="{$file->name}" class="group" rel="promo">
+                                <img src="{$basePath}/{$file->meta_path}" alt="{_'Obrázek.'}" />
+                                <div class="info">
+                                    <h3>{$file->name|truncate:22}</h3>
+                                    <p title="{$file->describe}">{$file->describe|truncate:55}</p>
+                                    <p class="date">{$file->group} | {$file->inserttime|date:'j. n. Y'}</p>
+                                </div>
+                            </a>
+                            </div>
+                        {else}    
+                            <div class="images">
+                            {input select-{$file->id}}
+                            <a href="{$basePath}/{$file->path}" title="{$file->name}" target="_blank">
+                                <img src="{$basePath}/images/download-file.png" alt="{_'Stáhnout.'}" />
+                                <div class="info">
+                                    <h3>{$file->name|truncate:22}</h3>
+                                    <p title="{$file->describe}">{$file->describe|truncate:66}</p>
+                                    <p class="date">{$file->group} | {$file->inserttime|date:'j. n. Y'}</p>
+                                </div>
+                            </a>
+                            </div>
+                        {/if}
+                    </li>
+                {/foreach}
+                </ul>
+                </td>
+            </tr>
+        {else}
+            <tr class="list">
+                <td colspan="4" class="nohover noicon"><p>{_'Nenalezl jsem žádnou položku.'} <a n:href="new" class="noblock">{_'Zkuste něco přidat.'}</a></p></td>
+            </tr>
+        {/if}
+    </tbody>
+</table>
+{/form}
+</div>

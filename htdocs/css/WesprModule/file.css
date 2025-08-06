@@ -1,0 +1,210 @@
+/* 
+    Stylesheet  : WESPR - File presenter
+    Created on  : 31.10.2013, 20:53:34
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*Homepage //////////////////////////////////////////////////////////////////*/
+#homepage-button-file a:hover {
+    color: rgb(255,255,255);
+    background-color: rgb(0,100,0);
+}
+
+/*Menu area //////////////////////////////////////////////////////////////////*/
+#menuline li.file a:hover, #menuline li.file-current a {
+    color: rgb(255,255,255);
+    background-color: rgb(0,100,0);
+}
+
+/*Submenu area ///////////////////////////////////////////////////////////////*/
+#submenuline-file {
+    border-top: 5px solid rgb(0,100,0);
+}
+
+#submenuline-file ul li.tools {
+    border-right: 1px solid rgb(255,150,0); 
+    background: black;
+}
+
+#submenuline-file li a:hover, #submenuline-file li a.current {
+    color: rgb(0,100,0);
+}
+
+/*Forms //////////////////////////////////////////////////////////////////////*/
+#form-file {
+    position: static;
+    top: 0px;
+    left: auto;
+    clear: both;
+}
+
+#frm-fileNew-newFileForm .main-button:hover,
+#frm-fileNew-newFileForm .add-button:hover,
+.link-button:hover {
+    color: rgb(255,255,255);
+    background: rgb(0,100,0);
+    border: 1px solid rgb(50,50,50);
+}
+
+/*Preview area for Javascript files*/
+form input.upload-button {
+    width: 99%;
+}
+
+/*Preview area*/
+#preview {
+    width: 99%;
+    border: 1px solid rgb(100,100,100);
+    border-radius: 3px;
+}
+
+#preview ul.thumb li {
+    display: inline-block;
+    float: none;
+}
+
+#preview p {
+    padding: 1%;
+}
+
+#preview div.image {
+    display: block;
+    position: relative;
+    width: 230px;
+    height: 230px;        
+    padding: 5px;
+}
+
+#preview img {
+    position: absolute;
+    max-width: 220px;
+    width: auto;
+    max-height: 220px;
+    height: auto;
+    /*clip: rect(0px, 230px, 230px, 0px);*/
+    z-index: 1;
+}
+
+#preview img.accepted {
+    border: 3px solid rgb(0,100,50);
+}
+
+#preview img.rejected-size, form #preview img.rejected-postsize {
+    border: 3px solid rgb(250, 0, 0);
+}
+
+#preview .info {
+    position: absolute;
+    bottom: 5%;
+    width: 96%;
+    height: auto;
+    font-size: 0.8em;
+    padding: 2%;
+    background-color: rgba(255,255,255,0.5);
+    z-index: 12;
+}
+
+/*Tables /////////////////////////////////////////////////////////////////////*/
+.table-file .icon input:hover {
+    cursor:pointer; 
+    color: rgb(255,255,255);
+    background-color: rgb(0,100,0);
+}
+
+.table-file li.public, .table-file div.public {
+    background-color: rgba(0,50,0,0.6);
+}
+
+.table-file div.public {
+    border: 3px solid rgba(0,50,0,0.6);
+}
+
+.table-file li.locked {
+    background-color: rgba(0,100,0,0.6);
+}
+
+.table-file .date a {
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.table-file .date a:hover {
+    text-decoration: none;
+}
+
+.table-file td.nohover:hover {
+    background: inherit;
+}
+
+/*Table layout - thumbs*/
+.table-file tbody.thumb .images {
+    height: 230px;
+}
+
+.table-file tbody.thumb li:hover {
+    background-color: rgba(0,50,0,1);
+}
+
+.table-file .info {
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    width: 100%;
+    height: 90px;
+    padding: 0px;
+    z-index: 3;
+    background: rgba(255,255,255,0.6);
+}
+
+.table-file .info h3 {
+    width: 96%;
+    font-size: 1.1em;
+    color: rgb(0,0,0);
+    padding: 1%;
+    margin: 1%;
+    clear: both;
+    z-index: 1;
+}
+
+.table-file .info p, table .info p.date {
+    width: 96%;
+    text-align: left;
+    line-height: 1.1em;
+    color: rgb(50,50,50);
+    padding: 0px 2%;
+    clear: both;
+}
+
+.table-file .info p.date {
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 0px;
+    bottom: 0px;
+    text-align: right;
+}
+
+tbody.thumb td.add_file {
+    width: 25%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+}
+
+tbody.thumb td.add_file img {
+    position: relative;
+    width: 30%;
+    vertical-align: middle;
+}
+
+tbody.thumb img {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    border: 0px;
+    z-index: 0;
+}

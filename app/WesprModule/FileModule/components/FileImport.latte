@@ -1,0 +1,31 @@
+<div id="form-main">
+    <h2>{_'Files to import'} ({count($files)})</h2>
+</div>
+<div id="form-add">
+    <a class="link-button" n:href="upload!">Import</a>
+</div>    
+<div id="form-full">        
+    <div id="preview">
+        {if $files !== null}
+        <ul class="thumb">
+            <li n:foreach="$files as $filePath => $file">
+            <div class="image">
+                <a href="{$basePath}/{$filePath}" title="{$file->getName()}" class="group" rel="promo">
+                    <img src="{$basePath}/{$filePath}">
+                </a>
+                <div class="info">
+                    <p>{_'Future Group:'} <strong>{if $file->getLastFolder() === null}Default{else}{$file->getLastFolder()}{/if}</strong></p>
+                    <p><strong>{$file->getName()}</strong></p>
+                    <p>{round($file->getSize() / (1024*1024), 2)} MB | {$file->getFileType()}</p>
+                </div>
+            </div>
+            </li>
+        </ul>
+        {else}
+            <p>{_'There are no files for import. Add some files to the folder for upload.'}</p>
+        {/if}
+    </div>
+</div>            
+<div id="form-button">
+    <a class="link-button" n:href="upload!">Import</a>
+</div>    

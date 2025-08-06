@@ -1,0 +1,9 @@
+{* Latte template for error result of validation *}
+
+{block #content}
+<section class="main">
+    <h1>{_'Ou! Ověření účtu se nezdařilo'}</h1>
+    <p>{_'Je mi líto, ale ověření vašeho účtu se nezdařilo. Zkuste odeslat ověřovací email'} <a n:href='Mail:activation'>{_'znovu'}</a>.</p>
+    <p>{_'Email jsem odeslal na adresu'} <strong>{$email}</strong>.</p>
+</section>
+{/block}

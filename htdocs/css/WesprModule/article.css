@@ -1,0 +1,81 @@
+/* 
+    Stylesheet  : WESPR - Article presenter
+    Created on  : 31.10.2013, 20:53:34
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*Homepage //////////////////////////////////////////////////////////////////*/
+#homepage-button-text a:hover {
+    color: rgb(255,255,255);
+    background-color: rgb(255,150,0);
+}
+
+/*Menu area //////////////////////////////////////////////////////////////////*/
+#menuline li.text a:hover, #menuline li.text-current a, #intro-button-text a:hover {
+    color: rgb(255,255,255);
+    background-color: rgb(255,150,0);
+}
+
+/*Submenu area ///////////////////////////////////////////////////////////////*/
+#submenuline-article {
+    border-top: 5px solid rgb(255,150,0);
+}
+
+#submenuline-article ul li.tools {
+    border-right: 1px solid rgb(255,150,0); 
+    background: black;
+}
+
+#submenuline-article li a:hover, #submenuline-article li a.current {
+    color: rgb(255,150,0);
+}
+
+/*Forms //////////////////////////////////////////////////////////////////////*/
+#frm-articleForm .main-button:hover, .add-button:hover,
+#frm-eventForm .main-button:hover, .add-button:hover,
+#frm-importEventForm .main-button:hover, .add-button:hover,
+#frm-checkEventForm .main-button:hover, .add-button:hover, 
+#frm-translationForm .main-button:hover, .add-button:hover {    
+    color: rgb(255,255,255);
+    border: 1px solid rgb(50,50,50);
+    background: rgb(255,150,0);
+}
+
+/*Tables /////////////////////////////////////////////////////////////////////*/
+.table-article .icon input:hover {
+    cursor: pointer; 
+    color: rgb(0,0,0);
+    background-color: rgb(255,150,0);
+}
+
+.table-article td.public {
+    border: 1px solid rgb(255,150,0);
+}
+
+.table-article td.locked {
+    border: 1px solid rgb(200,100,0);
+}
+
+.table-article td:hover {
+    background-color: rgb(255,150,0);
+}
+
+.table-article td.nohover:hover {
+    background: inherit;
+}
+
+.table-article td p a {
+    text-decoration: underline;
+    color: rgb(100,100,100);
+}
+
+.table-article td p a:hover {
+    text-decoration: none;
+    color: rgb(0,0,0);
+}
+
+/*Table layout */
+.table-article tbody.list td.publish {
+    /*border: 1px solid rgb(255,150,0);*/
+}

@@ -1,0 +1,24 @@
+<div id="submenuline-file">
+    <ul>
+        <li><a href="{plink File:New}" {ifCurrent File:New} class="current"{/ifCurrent}>{_'New'}</a></li>
+        <li><a href="{plink File:Import}" {ifCurrent File:Import} class="current"{/ifCurrent}>{_'Import'}</a></li>
+        <li n:if="$presenter->user->isAllowed('Wespr:Group', 'default')"><a href="{plink :Wespr:Group:}" n:class="$presenter->isLinkCurrent(':Wespr:Group:') ? current">{_'Groups'}</a></li>
+    </ul>
+    <ul class="extends">
+        {if $countGroups === 0 && $countGenericGroups === 0}
+            <li style="color: rgb(200,0,0);">{_'There is no file group. Please create new file group in settings.'}</li>
+        {/if}
+        {if $countGroups > 0}
+            <li>{_'Groups:'}</li>
+            {foreach $menu as $menuItem}
+                <li><a href="{plink File:default $menuItem->id}" {ifCurrent File:default $menuItem->id} class="current"{/ifCurrent}>{$menuItem->alias}</a></li>
+            {/foreach}
+        {/if}
+        {if $countGenericGroups > 0}
+            {foreach $genericGroups as $group}
+                <li><a href="{plink File:default $group->id}" {ifCurrent File:default $group->id} class="current"{/ifCurrent}>{$group->alias}</a></li>
+            {/foreach}
+        {/if}
+        <li><a href="{plink File:}" {ifCurrent File: null} class="current"{/ifCurrent}>{_'All Files'}</a></li>
+    </ul>
+</div>

@@ -1,0 +1,9 @@
+<div id="submenuline-setting">
+    <ul>
+        <li n:if="$presenter->user->isAllowed('Wespr:Group', 'default')"><a href="{plink Group:}" n:class="$presenter->isLinkCurrent('Group:') ? current">{_'Groups'}</a></li>
+        <li n:if="$presenter->user->isAllowed('Wespr:Page', 'default')"><a href="{plink Page:}" n:class="$presenter->isLinkCurrent('Page:') ? current">{_'Pages'}</a></li>
+        <li n:if="$presenter->user->isAllowed('Wespr:Layout', 'default')"><a href="{plink Layout:}" n:class="$presenter->isLinkCurrent('Layout:') ? current">{_'Templates'}</a></li>
+        <li n:if="$presenter->user->isAllowed('Wespr:User', 'default')"><a href="{plink User:}" n:class="$presenter->isLinkCurrent('User:') ? current">{_'Account'}</a></li>
+        <li n:if="$presenter->user->isAllowed('Wespr:Code', 'default')"><a href="{plink Code:}" n:class="$presenter->isLinkCurrent('Code:') ? current">{_'Code editor'}</a></li>
+    </ul>
+</div>

@@ -1,0 +1,208 @@
+{**
+ * WESPR layout template.
+ *
+ * @copyright   Copyright (c) 2013 David Ehrlich
+ * @package     WESPR:Main layout
+ * @version     0.9  
+ * @license     http://opensource.org/licenses/MIT MIT
+  
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="description" content="{_'WESPR light web administrator'}">
+    <meta name="robots" content="{$robots}" n:ifset="$robots">
+
+    <title>{ifset $title}{_$title} &ndash; {/ifset}WESPR</title>
+
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/general.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/article.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/file.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/settings.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/page.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/group.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/layout.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/user.css" type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen,projection,tv" href="{$basePath}/css/WesprModule/event.css" type="text/css">
+
+    <link rel="shortcut icon" href="{$basePath}/css/WesprModule/images/favicon.ico" type="image/x-icon">
+
+    <!-- JQuery CDN -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css" media="screen,projection,tv" />
+
+    <!--Fancybox for galery and frame-->
+    <script type="text/javascript" src="{$basePath}/js/jquery.fancybox.pack.js"></script>
+    <link rel="stylesheet" href="{$basePath}/css/WesprModule/jquery.fancybox.css" type="text/css" media="screen" />
+    
+    <!--Upload Center-->
+    <!--<script type="text/javascript" src="{$basePath}/js/uploadcenter.script.js"></script>-->
+
+    <!-- Nette Javascript Library -->
+    <!--<script type="text/javascript" src="{$basePath}/js/jquery.ui.dyk.js"></script>-->
+    <script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/jquery.nette.js"></script> 
+    <script type="text/javascript" src="{$basePath}/js/spinner.ajax.js"></script> 
+    
+    <!--Yi-->
+    <script type="text/javascript" src="{$basePath}/js/main.js"></script>
+    
+    <!-- DatePicker+ localization for calendar. -->
+    <script>
+    /* Czech initialisation for the jQuery UI date picker plugin. */
+    /* Written by Tomas Muller (tomas@tomas-muller.net). */
+    jQuery(function($) {
+        $.datepicker.regional['cs'] = {
+            closeText: 'Zavřít',
+            prevText: '&#x3c;Dříve',
+            nextText: 'Později&#x3e;',
+            currentText: 'Nyní',
+            monthNames: ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen',
+                'září', 'říjen', 'listopad', 'prosinec'],
+            monthNamesShort: ['led', 'úno', 'bře', 'dub', 'kvě', 'čer', 'čvc', 'srp', 'zář', 'říj', 'lis', 'pro'],
+            dayNames: ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota'],
+            dayNamesShort: ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'],
+            dayNamesMin: ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'],
+            weekHeader: 'Týd',
+            dateFormat: 'dd. mm. yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['cs']);
+    });
+    
+    $(document).ready(function () {
+        $("input.date").each(function () { // input[type=date] does not work in IE
+            var el = $(this);
+            var value = el.val();
+            var date = (value ? $.datepicker.parseDate($.datepicker.W3C, value) : null);
+
+            var minDate = el.attr("min") || null;
+            if (minDate) minDate = $.datepicker.parseDate($.datepicker.W3C, minDate);
+            var maxDate = el.attr("max") || null;
+            if (maxDate) maxDate = $.datepicker.parseDate($.datepicker.W3C, maxDate);
+
+            // input.attr("type", "text") throws exception
+            if (el.attr("type") == "date") {
+                var tmp = $("<input/>");
+                $.each("class,disabled,id,maxlength,name,readonly,required,size,style,tabindex,title,value".split(","), function(i, attr)  {
+                    tmp.attr(attr, el.attr(attr));
+                });
+                tmp.data(el.data());
+                el.replaceWith(tmp);
+                el = tmp;
+            }
+            el.datepicker({
+                minDate: minDate,
+                maxDate: maxDate
+            });
+            el.val($.datepicker.formatDate(el.datepicker("option", "dateFormat"), date));
+        });
+    });
+    </script>
+
+    <!--Fancybox for galery and frame-->
+    <script>
+    $(document).ready(function() {
+            $("a.group").fancybox({
+                    'transitionIn'  :	'elastic',
+                    'transitionOut' :	'elastic',
+                    'titlePosition' :	'inside',
+                    'speedIn'       :	600, 
+                    'speedOut'      :	200, 
+                    'overlayShow'   :	false
+            });
+
+    });
+
+    $(document).ready(function() {
+            $(".component").fancybox({
+                    maxWidth	: 980,
+                    maxHeight	: 500,
+                    fitToView	: false,
+                    width	: '95%',
+                    height	: '85%',
+                    autoSize	: false,
+                    autoCenter  : true,
+                    closeClick	: false,
+                    openEffect	: 'none',
+                    closeEffect	: 'none',
+                    helpers     : { overlay : { css : { 'background' : 'rgba(50,50,50,0.6)' } } }
+            });
+    });
+    </script>
+    {block head}{/block}
+</head>
+
+<body>
+	<script> document.body.className+=' js' </script>
+
+        <div id="header">
+            
+            {if $user->isLoggedIn()}
+                <div n:if="!$verification" class="flash">{_'Your account has NOT been activated.'} <a n:href=":Wespr:Mail:activation">{_'Please activate your account.'}</a><span class="help" title="Kliknutím odešlete email na registrovanou adresu.">[?]</span></div>
+                <div n:if="$verification === null" class="flash error">{_'Your account is corrupted. Please contact support.'} <a href="mailto:podpora@some-email.cz">[{_'Support.'}]</a></div>
+            {/if}
+
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type} ajax" onclick="flashHide(this);" data-flash-hide="visibility: hidden;">{_$flash->message}</div>
+            
+            <div id="header-inner">
+                {if $user->isLoggedIn() && isset($countAllPages)}
+                    <a href="{link :Front:Homepage:default}" target="_blank" title="{_'I will open new windows with the managed web site.'}"><img src="{$basePath}/css/WesprModule/images/logo.png" alt="Logo." class="logo" /></a>
+                {else}
+                    <a href="{link :Wespr:Sign:in}" title="{_'Back to your Dashboard.'}"><img src="{$basePath}/css/WesprModule/images/logo.png" alt="Logo." class="logo" /></a>
+                {/if}
+                {*
+                {if $presenter->name == 'Wespr:Sign'  || $presenter->name == 'Wespr:EalbumSign'}
+                    <a href="{link :Front:Homepage:default}"><img src="{$basePath}/css/WesprModule/images/logo.png" alt="Logo WESPR." class="logo" /></a>
+                {else}
+                    <a href="{link Default:}"><img src="{$basePath}/css/WesprModule/images/logo.png" alt="Logo WESPR." class="logo" /></a>
+                {/if}
+                *}
+            </div>
+        </div>
+
+        <div id="container">            
+            <div id="menuline">
+                <ul>
+                    {if $user->isLoggedIn()}
+                        <li n:if="!$presenter->isLinkCurrent(':Wespr:Default:Default')" class="home"><a href="{link :Wespr:Default:}" title="{_'WESPR Dashboard.'}"><img src="{$basePath}/images/icon-home.png" alt="{_'WESPR Dashboard.'}" /></a></li>
+                        <li n:if="!$presenter->isLinkCurrent(':Wespr:Default:Default')" n:class="$presenter->isLinkCurrent(':Wespr:Text:Article:*') ? text-current : text"><a href="{link :Wespr:Text:Article:new}">{_'Texts'}</a></li>
+                        <li n:if="!$presenter->isLinkCurrent(':Wespr:Default:Default')" n:class="$presenter->isLinkCurrent(':Wespr:File:File:*') ? file-current : file"><a href="{link :Wespr:File:File:}">{_'Files'}</a></li>
+                        <li n:if="!$presenter->isLinkCurrent(':Wespr:Default:Default')" n:class="$presenter->isLinkCurrent(':Wespr:Settings:') ? setting-current : setting"><a href="{link :Wespr:Settings:}">{_'Settings'}</a></li>
+                        <li class="user" title="{_'role'}: {foreach $user->getRoles() as $role}{$role}{/foreach} / {$user->getIdentity()->name}"><a n:href="signOut!">{_'Sign out'}</a></li>
+                        <li class="info"><a n:href="this, lang => cs">CS</a> / <a n:href="this, lang => en">EN</a></li>
+                    {else}
+                        <li n:class="$presenter->isLinkCurrent(':Wespr:Sign:in') ? 'sign-current' : 'sign'"><a href="{link :Wespr:Sign:in}">{_'Sign in'}</a></li>
+                        <li n:if="$registration" n:class="$presenter->isLinkCurrent(':Wespr:Ealbum:registration') ? 'sign-current' : 'sign'"><a href="{link :Wespr:Ealbum:registration}">{_'Sign up'}</a></li>
+                    {/if}
+                </ul>
+            </div>
+                
+            <div id="content">
+                {include #content}
+            </div>
+        </div>
+        <footer>
+            <div class="info">
+                <p>WESPR 2012-<?php echo date('Y');?> / {_'With pleasure by'} <a href="http://www.some-email.cz">Y.: Studio</a>.</p>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                    <img alt="{_'Creative Commons License'}" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/80x15.png" />
+                </a>
+                <p class="note">{_'Version'} {$versionWespr}</p>
+            </div>
+        </footer>
+
+</body>
+</html>

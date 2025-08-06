@@ -1,0 +1,18 @@
+{var $robots = noindex}
+
+{var $title = 'new files'}
+
+{block #content}
+    {control fileMenu}
+
+    {if $user->isInRole('user') && $countFiles > $userAuthority['LimitNumberFiles']}
+        {control buyMembership}
+    {else}
+        {control fileNew}
+    {/if}    
+    {* control fileEdit *}
+{/block}
+
+{block head}
+    {control fileNew:Scripts}
+{/block}

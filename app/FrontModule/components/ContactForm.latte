@@ -1,0 +1,44 @@
+
+{block contact}
+    {form contactForm}
+    {control $form errors}
+    
+    <a name="mark-contact"></a>
+    <table>
+        <thead>
+            <tr>
+                <th>{label name /}</th><th>{label email /}</th><th>{label phone /}</th>
+            </tr>
+        </thead>
+
+        <tfoot>
+            <tr>
+                <td class="control" colspan="2">
+                    {label control /}{input control}
+                </td>
+                <td id="form_button">
+                    {label submit /}{input submit}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    {!_('Prosím vyplňte svůj email. Pokud vyplníte telefonní číslo <strong>nepoužívejte znak (+)</strong> na začátku.')}
+                </td>
+            </tr>
+        </tfoot>
+
+        <tbody>
+            <tr>
+                <td>{input name}</td>
+                <td>{input email}</td>
+                <td>{input phone}</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    {input text}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {/form}
+{/block}

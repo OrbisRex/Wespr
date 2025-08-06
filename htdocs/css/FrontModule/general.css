@@ -1,0 +1,671 @@
+/*
+    Stylesheet  : e/album - General
+    Module      : Front
+    Created on  : 27.9.2014
+    Author      : David Ehrlich
+    Licence     : MIT
+*/
+
+/*General ////////////////////////////////////////////////////////////////////////*/
+html {
+    position: static;
+    top: 0px;
+    left: auto;
+    width: 100%;
+    height: auto;
+    font: 16px/1.5 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
+    font-size: 1em;
+    color: rgb(0,0,0);
+    margin: auto;
+    background: rgb(255,255,255);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1,h2,h3 {
+    color: rgb(100,100,100);
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    margin-top: 1em;
+    font-size: 4vh;
+}
+
+h2 {
+    font-size: 3vh;
+}
+
+h3 {
+    font-size: 2vh;
+}
+
+p {
+    font-size: 2vh;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    border: 0;
+}
+
+#ajax-spinner {
+	display: none;
+	position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+	padding: 0;
+        margin: 0;
+	background: rgba(0, 0, 0, 0.6) url('images/spinner.gif') no-repeat 50% 50%;
+	font-size: 0;
+	z-index: 123456;
+}
+
+div.flash {
+	color: black;
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+a {
+    color: rgb(255, 100, 0);
+    text-decoration: underline;
+}
+
+a:hover {
+    color: rgb(100,100,100);
+    text-decoration: none;
+}
+
+a[href^="error:"] {
+    background: rgb(255,0,0);
+    color: white;
+}
+
+/*Header////////////////////////////////////////////////////////////////*/
+header {
+    position: fixed;
+    top: -3px;
+    left: 0;
+    width: 96vw;
+    height: 0;
+    padding: 0 2vw;
+    clear: both;
+    background-color: rgba(255,255,255,0);
+    z-index: 6001;
+}
+
+header .lang {
+    display: block;
+    width: auto;
+    height: auto;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgba(50, 50, 50, 1);
+    border-right: 1px solid rgb(50,50,50);
+    border-left: 1px solid rgb(50,50,50);
+    border-bottom: 1px solid rgb(50,50,50);
+    border-radius: 10%;
+    padding: 7px;
+    float: right;
+    z-index: 6000;
+}
+
+header .lang a, header .lang span {
+    display: inline-block;
+    font-size: 0.7em;
+    margin-top: 0.5em;
+    z-index: 6000;
+}
+
+header .logo {
+    display: block;
+    width: 69%;
+    height: auto;
+    text-align: right;
+    padding-top: 30%;
+    padding-bottom: 5%;
+    float: left;
+}
+
+header .logo a {
+    display: block;
+    width: auto;
+    font-size: 5em;
+    font-weight: bold;
+    letter-spacing: -0.1em;
+    text-decoration: none;
+    padding-left: 0.5em;
+}
+
+.logo-y {
+    position: relative;
+    top: -0.25em;
+    left: 0;
+    color: rgb(100,100,100);
+}
+
+header .logo img {
+    position: static;
+    top: auto;
+    right: auto;
+    float: right;
+    border: 0px;
+}
+
+/*Menu///////////////////////////////////////////////////////////////////////*/
+.menu_container {
+    position: fixed;
+    top: 5vh;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(50, 50, 50, 1);
+    box-shadow: 0px 3px 3px rgba(20, 20, 20, 0.8);
+    clear: both;
+    z-index: 6000;
+}
+
+.menu_container ul {
+    width: auto;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+    padding: 0;
+}
+
+.menu_container li {
+    display: inline-block;
+    width: 100px;
+    list-style: none;
+    margin: auto;
+    padding: 5px;
+}
+
+.menu_container a, .menu_container a:hover {
+    display: block;
+    width: 100px;
+    height: auto;
+    font-size: 1.1em;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(255,100,0);
+    margin: 0;
+    padding-top: 0;
+}
+
+.menu_container img {
+    border: 0;
+}
+
+.menu_container a:hover {
+    color: rgb(100,100,100);
+    background-color: rgb(255,255,255);
+}
+
+/*Sub menu///////////////////////////////////////////////////////////////////*/
+#submenu_container {
+    height: 2.1em;
+    background-color: inherit;
+    margin: auto;
+}
+
+#submenu_container ul {
+    width: auto;
+    height: 100%;
+    text-align: left;
+    margin: auto;
+    padding: 0;
+}
+
+#submenu_container li {
+    display: inline-block;
+    width: 100px;
+    list-style: none;
+    margin: auto;
+    padding: 5px;
+}
+
+/*Default Content////////////////////////////////////////////////////////////*/
+#content {
+    position: relative;
+    top: 0;
+}
+
+#content section {
+    width: 100vw;
+    clear: both;
+}
+
+/*Texts*/
+#content section.articles p {
+    color: rgb(100,100,100);
+}
+
+#content section.articles ul {
+    display: block;
+    list-style-type: square;
+    padding-inline-start: 7vh;
+    color: rgb(100,100,100);
+}
+
+/*Notice*/
+#content p.notice {
+    display: block;
+    font-size: 1em;
+    padding: 0.5em;
+}
+
+/*Copyright box*/
+#content .copyright {
+    position: absolute;
+    display: inline-block;
+    bottom: 20px;
+    right: 0px;
+    width: 80px;
+    text-align: left;
+    font-size: 1em;
+    color: #646464;
+    padding-left: 0.2em;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/*Add button*/
+#content .add {
+    position: fixed;
+    height: 2em;
+    padding: 0;
+    margin: 0;
+    z-index: 123;
+}
+
+#content .add p {
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+}
+
+#content .add a, #content .add a:hover {
+    display: block;
+    width: 5%;
+    height: 1em;
+    font-size: 2em;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(255,100,0);
+    padding: 0;
+    margin: 0;
+    background-color: rgb(240,240,240);
+    float: right;
+}
+
+#content .add a:hover {
+    color: rgb(255,255,255);
+    background-color: rgb(100,100,100);
+}
+
+/*Images*/
+#content img {
+    display: inline-block;
+    padding: 0px;
+}
+
+/*About in the Articles section ///////////////////////////////////////////////*/
+#content section.articles #about {
+    background: rgb(255,100,0);
+}
+
+#content section.articles #about div.article-text {
+    display: inline-block;
+    min-height: 50vh;
+    width: 90vw;
+    padding: 25vh 5vw 25vh 5vw;
+    margin: 0;
+}
+
+#content section.articles #about h1 {
+    color: rgb(255,255,255);
+}
+
+#content section.articles #about p {
+    color: rgb(255,255,255);
+}
+
+#content section.articles #about a {
+    color: rgb(100,100,100);
+}
+
+#content section.articles #about a:hover {
+    color: rgb(255,255,255);
+}
+
+/*Forms ///////////////////////////////////////////////////////////////////////*/
+form {
+    display: block;
+    position: static;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    clear: both;
+    /*border: 1px solid red;*/
+}
+
+.form-full {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    clear: both;
+    /*border: 1px solid rgb(0,0,0);*/
+}
+
+#form-main {
+    position: static;
+    top: 0px;
+    left: 0px;
+    width: 48%;
+    height: auto;
+    text-align: left;
+    float: left;
+    padding: 5px;
+    /*border: 1px solid black;*/
+}
+
+#form-add {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    width: 48%;
+    height: auto;
+    padding: 5px;
+    float: right;
+    /*border: 1px solid orange;*/
+}
+
+.form-add-h3 {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    width: auto;
+    height: 49px;
+    padding: 0px;
+    clear: both;
+    /*border: 1px solid orange;*/
+}
+
+/*Form texts */
+form h2 {
+    display: block;
+    position: static;
+    top: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    text-align: left;
+    font-size: 2em;
+    color: rgb(0,0,0);
+    padding: 0px;
+    margin: 0px;
+    /*border: 1px solid red;*/
+}
+
+form h3 {
+    font-size: 2em;
+    font-weight: bold;
+    color: rgb(255,255,255);
+    float: left;
+}
+
+form p {
+    margin: 0;
+}
+
+label {
+    position: static;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    font-size: 1.2em;
+    clear: both;
+}
+
+form .note, form .warning {
+    position: static;
+    top: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    font-size: 0.8em;
+    color: rgb(150,150,150);
+    padding: 0px;
+    margin-top: 0px;
+    clear: both;
+}
+
+form .warning {
+    color: rgb(200,0,0);
+}
+form ul.note {
+    padding: 0em 1em;
+    list-style-position: inside;
+}
+
+form ul.note li {
+    list-style: square;
+}
+
+form ul.error  {
+    color: rgb(255,255,255);
+    background: rgb(150,0,0);
+    border: 1px solid rgb(255,0,0);
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 3px;
+}
+
+form ul.error li {
+    list-style: none;
+}
+
+/*Form inputs */
+input, textarea {
+    width: 20%;
+    font: 16px/1.5 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
+    color: rgb(100,100,100);
+    padding: 0.5em;
+    margin: 0 0.5em;
+    border: 1px solid rgb(100,100,100);
+    border-radius: 3px;
+    float: left;
+}
+
+.text-short {
+    display: inline-block;
+    width: 44%;
+    margin-right: 20px;
+}
+
+.select, .select_short {
+    position: static;
+    top: 0px;
+    left: 0px;
+    width: 98%;
+    height: auto;
+    color: rgb(100,100,100);
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid rgb(100,100,100);
+    border-radius: 3px;
+}
+
+.upload {
+    position: static;
+    top: 0px;
+    left: 0px;
+    width: 98%;
+    height: auto;
+    color: rgb(100,100,100);
+    padding: 2px;
+    margin-bottom: 15px;
+    border: 1px solid rgb(100,100,100);
+    border-radius: 3px;
+}
+
+.select_short {
+    display: inline-block;
+    width: 47%;
+    margin-right: 20px;
+}
+
+label > input {
+    position: relative;
+    top: 0.7em;
+    width: auto;
+    margin: 0 0.5em;
+}
+
+form > :last-child {
+    margin-right: 0;
+}
+
+/*select + select, input + input, input + select {
+    margin-left: 35px;
+}*/
+
+/*From button area */
+#form-button {
+    position: static;
+    top: auto;
+    bottom: 0px;
+    left: auto;
+    width: 98%;
+    height: 50px;
+    padding: 10px;
+    clear: both;
+    /*border: 1px solid rgb(0,100,100);*/
+}
+
+.main-button, .add-button {
+    position: static;
+    top: 0px;
+    left: 0px;
+    width: auto;
+    min-width: 120px;
+    height: auto;
+    font-size: 1.2em;
+    color: rgb(255,255,255);
+    background: rgb(100,100,100);
+    padding: 5px;
+    margin-left: 20px;
+    float: right;
+    border: 1px solid rgb(0,0,0);
+    cursor: pointer;
+}
+
+.add-button {
+    min-width: 80px;
+    color: rgb(100,100,100);
+    background: rgb(255,255,255);
+    border: 1px solid rgb(0,0,0);
+}
+
+.main-button:hover, .add-button:hover {
+    color: rgb(255,255,255);
+    background: rgb(0,120,220);
+    border: 1px solid rgb(50,50,50);
+}
+
+/*Footer/////////////////////////////////////////////////////////////////////*/
+footer {
+    position: relative;
+    display: inline-block;
+    top: 80px;
+    width: 98%;
+    height: 20vh;
+    padding: 1%;
+    background-color: rgb(100,100,100);
+    clear: both;
+}
+
+footer .menu {
+    float: left;
+}
+
+footer .menu ul {
+    display: inline-block;
+    width: auto;
+    margin: auto;
+    padding: 0;
+}
+
+footer .menu li {
+    width: 100px;
+    list-style: none;
+    margin: auto;
+    padding: 5px;
+}
+
+footer .menu a, footer .menu a:hover {
+    display: block;
+    width: 100px;
+    height: auto;
+    font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(200,200,200);
+    margin: 0;
+    padding-top: 0;
+    background-color: rgb(115, 115, 115);
+}
+
+footer .menu a:hover {
+    color: rgb(255,100,0);
+    background-color: rgb(50, 50, 50);
+}
+
+footer .copyright {
+    float: right;
+}
+
+footer .copyright p, footer .copyright p.note {
+    text-align: right;
+    font-size: 0.8em;
+    color: rgb(200,200,200);
+    margin: 0;
+    padding: 0;
+}
+
+footer .copyright p.note {
+    font-size: 0.6em;
+    clear: both;
+}
+
+footer .copyright p.license {
+    float: left;
+}
+
+footer a {
+    color: rgb(255,100,0);
+}
+
+footer a:hover {
+    color: rgb(255,255,255);
+}
+
+footer .copyright img {
+    padding: 3px 0 0 10px;
+    float: right;
+}

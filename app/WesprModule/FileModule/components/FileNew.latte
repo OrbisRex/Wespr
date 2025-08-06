@@ -1,0 +1,35 @@
+<div n:snippet="file-new">
+{form newFileForm class => ajax}
+    {control $form errors}
+
+    <div id="form-main">
+        <h2>{_'New File'}</h2>
+        {label tags /}
+        {input tags, autofocus => true}<br />
+        <p class="lower-note">{_'More than one tag separate by space.'}</p>
+    </div>
+    <div id="form-add">
+        <div class="form-add-h3">
+            {label cancel /}{input cancel}
+            {label save /}{input save}
+        </div>
+        <div>
+            {label state /}<br>{input groups} {input state}
+        </div>
+    </div>
+    <div id="form-full">        
+        {label description /}<br>{input description}
+    </div>
+    
+    {*Files Preview by Javascript*}
+    {label upload /}<br>{input upload}
+    {input uploadButton}
+    <p class="lower-note">{_'You can choose more than one file if you press Ctrl.'}</p>
+    <div id="preview"><p>{_'Upload some files.'}</p></div>
+
+    <div id="form-button">
+        {label cancel /}{input cancel}
+        {label save /}{input save}
+    </div>
+{/form}
+</div>

@@ -1,0 +1,26 @@
+{var $robots = noindex}
+
+{var $title = 'Sign in'}
+
+{block #content}
+<div n:if='!$user->isLoggedIn()'>
+{form signInForm}
+    {control $form errors}
+    <div class="form-fields">
+        {input email}
+    </div>
+    <div class="form-fields">
+        {input password}
+    </div>
+    <div class="form-fields-text">
+        {input remember} {label remember /}
+    </div>
+    <div class="form-button">
+        {input send} <a href="{plink ':Wespr:Registration:default'}">{_'Sign up'}</a>
+    </div>
+{/form}
+</div>
+
+<div n:if='$user->isLoggedIn()'>
+    <p><a href="{plink ':Wespr:Default:default'}">{_'Go back to WESPR.'}</a></p>
+</div>
